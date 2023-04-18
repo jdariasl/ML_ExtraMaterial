@@ -4,6 +4,6 @@
 format: jb-book
 root: intro
 chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+- file: content/BO_description
+- file: content/BO_Intro
+- file: content/BO_hyperparameter

@@ -1,11 +1,13 @@
-# Welcome to your Jupyter Book
+# ML Extra Material
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+This jupyter book contains extra material to those included on my [ML introductory course](https://jdariasl.github.io/ML_2020/intro.html) 
+and also on the [Fundamentals of Deep Learning](https://rramosp.github.io/2021.deeplearning/intro.html).
 
-Check out the content pages bundled with this sample book to see more.
+The aim is to organize the material of additional topics of interest. Some of the notebboks were developed by me and many others are based
+on open notebooks shared by others individually acknolwedged accordingly.
+
+
+Check out the content pages:
 
 ```{tableofcontents}
 ```
