@@ -5,7 +5,7 @@
 Based on course and tutorial materials written by Javier Gonzalez and Zhenwen Dai.
 # The goal of this lab session is to use Bayesian optimization to tune the parameters of Machine Learning algorithms using different libraries.
 
-# # 1 Tuning the Parameters of Machine Learning algorithms
+# ## 1. Tuning the Parameters of Machine Learning algorithms
 
 # After learning some theory about Bayesian Optimization, let's have a look at how to use GPyOpt to tune the hyper-parameters of a practical algorithm. Here shows how to tune the hyper-parameters for Support Vector Regression (SVR) with the toy dataset that we have seen from Lab 1: the Olympic marathon dataset.
 # 

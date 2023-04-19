@@ -225,27 +225,22 @@
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Global Optimization with Gaussian Processes: Part2
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#tuning-the-parameters-of-machine-learning-algorithms">
-   1 Tuning the Parameters of Machine Learning algorithms
+   1. Tuning the Parameters of Machine Learning algorithms
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-1">
      Exercise 1
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-2">
      Exercise 2
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#scikit-optimize">
      Scikit-optimize
     </a>
@@ -272,27 +267,22 @@
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Global Optimization with Gaussian Processes: Part2
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#tuning-the-parameters-of-machine-learning-algorithms">
-   1 Tuning the Parameters of Machine Learning algorithms
+   1. Tuning the Parameters of Machine Learning algorithms
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-1">
      Exercise 1
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-2">
      Exercise 2
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#scikit-optimize">
      Scikit-optimize
     </a>
@@ -311,9 +301,8 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="global-optimization-with-gaussian-processes-part2">
 <h1>Global Optimization with Gaussian Processes: Part2<a class="headerlink" href="#global-optimization-with-gaussian-processes-part2" title="Permalink to this headline">¶</a></h1>
 <p>The goal of this lab session is to use Bayesian optimization to tune the parameters of Machine Learning algorithms using different libraries.</p>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="tuning-the-parameters-of-machine-learning-algorithms">
-<h1>1 Tuning the Parameters of Machine Learning algorithms<a class="headerlink" href="#tuning-the-parameters-of-machine-learning-algorithms" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="tuning-the-parameters-of-machine-learning-algorithms">
+<h2>1. Tuning the Parameters of Machine Learning algorithms<a class="headerlink" href="#tuning-the-parameters-of-machine-learning-algorithms" title="Permalink to this headline">¶</a></h2>
 <p>After learning some theory about Bayesian Optimization, let’s have a look at how to use GPyOpt to tune the hyper-parameters of a practical algorithm. Here shows how to tune the hyper-parameters for Support Vector Regression (SVR) with the toy dataset that we have seen from Lab 1: the Olympic marathon dataset.</p>
 <p>We split the original dataset into the training data (first 20 datapoints) and testing data (last 7 datapoints). The performance of SVR is evaluated in terms of Rooted Mean Squared Error (RMSE) on the testing data.</p>
 <p>As in previous labs, we start loading the requires modules.</p>
@@ -475,7 +464,7 @@
 </div>
 </div>
 <div class="section" id="exercise-1">
-<h2>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h2>
+<h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h3>
 <p>1.1 Why we do not directly use the RMSE of the whole training dataset as the objective? Why bother with cross-validation?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -494,7 +483,7 @@
 </div>
 </div>
 <div class="section" id="exercise-2">
-<h2>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">¶</a></h2>
+<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">¶</a></h3>
 <p>Select your favourite Machine Learning algorithm for <a class="reference external" href="http://scikit-learn.org/stable/">scikit-learn</a>, find and interesting data set (for instance form the <a class="reference external" href="http://archive.ics.uci.edu/ml/">UCI  repository</a> and tune the parameters of your algorithm using GPyOpt. Use the code of this notebook as reference and be creative!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -506,7 +495,7 @@
 <p>There are numerous Bayesian optimization libraries out there which include different functionalities and algorithms.</p>
 </div>
 <div class="section" id="scikit-optimize">
-<h2>Scikit-optimize<a class="headerlink" href="#scikit-optimize" title="Permalink to this headline">¶</a></h2>
+<h3>Scikit-optimize<a class="headerlink" href="#scikit-optimize" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://scikit-optimize.github.io/">Scikit-optimize</a> is a library for sequential model-based optimization that is based on <a class="reference external" href="http://scikit-learn.org/">scikit-learn</a>. It also supports Bayesian optimization using Gaussian processes. The API is designed around minimization, hence, we have to provide negative objective function values.  The results obtained here slightly differ from previous results because of non-deterministic optimization behavior and different noisy samples drawn from the objective function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -516,6 +505,7 @@
 
 <span class="c1">#Repeat the hyperparameter tunning process using Scikit-optimize instead of GpyOpt.</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
