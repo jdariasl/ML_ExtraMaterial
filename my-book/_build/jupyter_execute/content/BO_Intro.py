@@ -201,7 +201,7 @@ myBopt.model.model
 # In[19]:
 
 
-# Answer to 1.4 here:
+# Answer to 1.3 here:
 
 
 
@@ -259,7 +259,7 @@ bounds_shc = GPyOpt.fmodels.experiments2d.sixhumpcamel().bounds
 # In[24]:
 
 
-# Answer to 3.4 here:
+# Answer to 2.4 here:
 
 
 
