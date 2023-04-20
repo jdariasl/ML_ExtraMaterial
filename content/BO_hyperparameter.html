@@ -301,6 +301,14 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="global-optimization-with-gaussian-processes-part2">
 <h1>Global Optimization with Gaussian Processes: Part2<a class="headerlink" href="#global-optimization-with-gaussian-processes-part2" title="Permalink to this headline">¶</a></h1>
 <p>The goal of this lab session is to use Bayesian optimization to tune the parameters of Machine Learning algorithms using different libraries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install git+https://github.com/jdariasl/GPy.git</span>
+<span class="c1">#!pip install GPyOpt==1.2.1</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="tuning-the-parameters-of-machine-learning-algorithms">
 <h2>1. Tuning the Parameters of Machine Learning algorithms<a class="headerlink" href="#tuning-the-parameters-of-machine-learning-algorithms" title="Permalink to this headline">¶</a></h2>
 <p>After learning some theory about Bayesian Optimization, let’s have a look at how to use GPyOpt to tune the hyper-parameters of a practical algorithm. Here shows how to tune the hyper-parameters for Support Vector Regression (SVR) with a toy dataset: the Olympic marathon dataset.</p>
@@ -368,7 +376,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE = 0.33446835065565117
 </pre></div>
 </div>
-<img alt="../_images/BO_hyperparameter_11_1.png" src="../_images/BO_hyperparameter_11_1.png" />
+<img alt="../_images/BO_hyperparameter_12_1.png" src="../_images/BO_hyperparameter_12_1.png" />
 </div>
 </div>
 <p>Now let’s try <strong>Bayesian Optimization</strong>. We first write a wrap function for fitting with SVR. The objective is the RMSE from cross-validation. We optimize the parameters in <em>log</em> space.</p>
@@ -423,7 +431,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/BO_hyperparameter_18_0.png" src="../_images/BO_hyperparameter_18_0.png" />
+<img alt="../_images/BO_hyperparameter_19_0.png" src="../_images/BO_hyperparameter_19_0.png" />
 </div>
 </div>
 <p>Let’s show the best parameters found. They differ significantly from the default parameters.</p>
@@ -460,7 +468,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE = 0.07905591470485882
 </pre></div>
 </div>
-<img alt="../_images/BO_hyperparameter_22_1.png" src="../_images/BO_hyperparameter_22_1.png" />
+<img alt="../_images/BO_hyperparameter_23_1.png" src="../_images/BO_hyperparameter_23_1.png" />
 </div>
 </div>
 <div class="section" id="exercise-1">
