@@ -7,7 +7,7 @@ Based on course and tutorial materials written by Javier Gonzalez and Zhenwen Da
 
 # ## 1. Getting started
 
-# In addition to GPy, this lab uses [GPyOpt](http://sheffieldml.github.io/GPy/), a satellite module of GPy useful to solve global optimization problems. Please be sure that it is correctly installed before starting. The easiest way is using pip. In Ubuntu machines you can do:
+# This lab uses [GPyOpt](http://sheffieldml.github.io/GPy/), a satellite module of GPy (Gaussian Processs framework) useful to solve global optimization problems. Crrent version of Gpy has compatibility issues with matplotlib versions > 3.4.0, so please be sure that it is correctly installed using the following commands before starting. The easiest way is using pip. In Ubuntu machines you can do:
 
 # In[1]:
 
