@@ -5,6 +5,13 @@
 Based on course and tutorial materials written by Javier Gonzalez and Zhenwen Dai.
 # The goal of this lab session is to use Bayesian optimization to tune the parameters of Machine Learning algorithms using different libraries.
 
+# In[1]:
+
+
+#!pip install git+https://github.com/jdariasl/GPy.git
+#!pip install GPyOpt==1.2.1
+
+
 # ## 1. Tuning the Parameters of Machine Learning algorithms
 
 # After learning some theory about Bayesian Optimization, let's have a look at how to use GPyOpt to tune the hyper-parameters of a practical algorithm. Here shows how to tune the hyper-parameters for Support Vector Regression (SVR) with a toy dataset: the Olympic marathon dataset.
@@ -13,7 +20,7 @@ Based on course and tutorial materials written by Javier Gonzalez and Zhenwen Da
 
 # As in previous labs, we start loading the requires modules.
 
-# In[1]:
+# In[2]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -24,7 +31,7 @@ from numpy.random import seed
 seed(12345)
 
 
-# In[2]:
+# In[3]:
 
 
 # Let's load the dataset
@@ -40,7 +47,7 @@ Y_test = Y[20:,0]
 
 # Let's first see the results with the default kernel parameters.
 
-# In[3]:
+# In[4]:
 
 
 from sklearn import svm
@@ -53,7 +60,7 @@ print("The default parameters obtained: C="+str(svr.C)+", epilson="+str(svr.epsi
 
 # We compute the RMSE on the testing data and plot the prediction. With the default parameters, SVR does not give an OK fit to the training data but completely miss out the testing data well.
 
-# In[4]:
+# In[5]:
 
 
 import matplotlib.pyplot as plt
@@ -67,7 +74,7 @@ print("RMSE = "+str(np.sqrt(np.square(Y_test_pred-Y_test).mean())))
 
 # Now let's try **Bayesian Optimization**. We first write a wrap function for fitting with SVR. The objective is the RMSE from cross-validation. We optimize the parameters in *log* space.
 
-# In[5]:
+# In[6]:
 
 
 nfold = 3
@@ -89,7 +96,7 @@ def fit_svr_val(x):
 
 # We set the search interval of $C$ to be roughly $[0,1000]$ and the search interval of $\epsilon$ and $\gamma$ to be roughtly $[1\times 10^{-5},0.1]$.
 
-# In[6]:
+# In[7]:
 
 
 bounds =[{'name': 'C', 'type': 'continuous', 'domain': (0.,7.)},
@@ -99,7 +106,7 @@ bounds =[{'name': 'C', 'type': 'continuous', 'domain': (0.,7.)},
 
 # We, then, create the GPyOpt object and run the optimization procedure. It might take a while.
 
-# In[7]:
+# In[8]:
 
 
 opt = GPyOpt.methods.BayesianOptimization(f = fit_svr_val,            # function to optimize       
@@ -108,7 +115,7 @@ opt = GPyOpt.methods.BayesianOptimization(f = fit_svr_val,            # function
                                              acquisition_par = 0.1)   # acquisition = Expected improvement
 
 
-# In[8]:
+# In[9]:
 
 
 # it may take a few seconds
@@ -118,7 +125,7 @@ opt.plot_convergence()
 
 # Let's show the best parameters found. They differ significantly from the default parameters.
 
-# In[9]:
+# In[10]:
 
 
 x_best = np.exp(opt.X[np.argmin(opt.Y)])
@@ -131,7 +138,7 @@ Y_test_pred = svr.predict(X_test)
 
 # We can see SVR does a reasonable fit to the data. The result could be further improved by increasing the *max_iter*. 
 
-# In[10]:
+# In[11]:
 
 
 plt.plot(X_train,Y_train_pred,'b',label='pred-train')
@@ -146,7 +153,7 @@ print("RMSE = "+str(np.sqrt(np.square(Y_test_pred-Y_test).mean())))
 # 
 # 1.1 Why we do not directly use the RMSE of the whole training dataset as the objective? Why bother with cross-validation?
 
-# In[11]:
+# In[12]:
 
 
 ## 1.1 Answer here 
@@ -154,7 +161,7 @@ print("RMSE = "+str(np.sqrt(np.square(Y_test_pred-Y_test).mean())))
 
 # 2.1 Write a small comparative study to opimize the paramters of the SVR in the marathon data by changing the acquistion function and the model for the RMSE. Use the options that you learned yesterday. Comment on the results.
 
-# In[12]:
+# In[13]:
 
 
 ## 1.2 Answer here 
@@ -164,7 +171,7 @@ print("RMSE = "+str(np.sqrt(np.square(Y_test_pred-Y_test).mean())))
 
 # Select your favourite Machine Learning algorithm for [scikit-learn](http://scikit-learn.org/stable/), find and interesting data set (for instance form the [UCI  repository](http://archive.ics.uci.edu/ml/) and tune the parameters of your algorithm using GPyOpt. Use the code of this notebook as reference and be creative!
 
-# In[13]:
+# In[14]:
 
 
 ## 2 Answer here 
@@ -177,7 +184,7 @@ print("RMSE = "+str(np.sqrt(np.square(Y_test_pred-Y_test).mean())))
 # 
 # [Scikit-optimize](https://scikit-optimize.github.io/) is a library for sequential model-based optimization that is based on [scikit-learn](http://scikit-learn.org/). It also supports Bayesian optimization using Gaussian processes. The API is designed around minimization, hence, we have to provide negative objective function values.  The results obtained here slightly differ from previous results because of non-deterministic optimization behavior and different noisy samples drawn from the objective function.
 
-# In[14]:
+# In[15]:
 
 
 from skopt import gp_minimize

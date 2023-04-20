@@ -12,7 +12,7 @@ Based on course and tutorial materials written by Javier Gonzalez and Zhenwen Da
 # In[1]:
 
 
-#!pip install GPy==1.10.0
+#!pip install git+https://github.com/jdariasl/GPy.git
 #!pip install GPyOpt==1.2.1
 
 
