@@ -27,7 +27,7 @@ from skopt.learning.gaussian_process.kernels import ConstantKernel, Matern
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Input [0;32mIn [14][0m, in [0;36m<cell line: 1>[0;34m()[0m
+Cell [0;32mIn[15], line 1[0m
 [0;32m----> 1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mskopt[39;00m [38;5;28;01mimport[39;00m gp_minimize
 [1;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01mskopt[39;00m[38;5;21;01m.[39;00m[38;5;21;01mlearning[39;00m [38;5;28;01mimport[39;00m GaussianProcessRegressor
 [1;32m      3[0m [38;5;28;01mfrom[39;00m [38;5;21;01mskopt[39;00m[38;5;21;01m.[39;00m[38;5;21;01mlearning[39;00m[38;5;21;01m.[39;00m[38;5;21;01mgaussian_process[39;00m[38;5;21;01m.[39;00m[38;5;21;01mkernels[39;00m [38;5;28;01mimport[39;00m ConstantKernel, Matern

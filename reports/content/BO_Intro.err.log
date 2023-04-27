@@ -22,7 +22,7 @@ myBopt.plot_acquisition()
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mTypeError[0m                                 Traceback (most recent call last)
-Input [0;32mIn [14][0m, in [0;36m<cell line: 1>[0;34m()[0m
+Cell [0;32mIn[14], line 1[0m
 [0;32m----> 1[0m [43mmyBopt[49m[38;5;241;43m.[39;49m[43mplot_acquisition[49m[43m([49m[43m)[49m
 
 File [0;32m~/opt/anaconda3/envs/my_pytorch/lib/python3.9/site-packages/GPyOpt/core/bo.py:265[0m, in [0;36mBO.plot_acquisition[0;34m(self, filename)[0m
