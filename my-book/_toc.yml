@@ -8,3 +8,4 @@ chapters:
 - file: content/BO_Intro
 - file: content/BO_hyperparameter
 - file: content/Latent_space_optimization
+- file: content/Three_perspectives_of_Diffusion_models
