@@ -1,0 +1,1689 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Three complementary/equivalent formulations of Difussion models &#8212; ML Extra Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Three_perspectives_of_Diffusion_models';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Conditional generation via Bayesian optimization in latent space" href="Latent_space_optimization.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/ml_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/ml_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    ML Extra Material
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="BO_description.html">Bayesian Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BO_Intro.html">Global Optimization with Gaussian Processes: Part1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BO_hyperparameter.html">Global Optimization with Gaussian Processes: Part2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Latent_space_optimization.html">Conditional generation via Bayesian optimization in latent space</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Three complementary/equivalent formulations of Difussion models</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/jdariasl/ML_ExtraMaterial/blob/master/my-book/content/Three_perspectives_of_Diffusion_models.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jdariasl/ML_ExtraMaterial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jdariasl/ML_ExtraMaterial/issues/new?title=Issue%20on%20page%20%2Fcontent/Three_perspectives_of_Diffusion_models.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/Three_perspectives_of_Diffusion_models.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Three complementary/equivalent formulations of Difussion models</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-lower-bound">1. Evidence Lower Bound</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variational-autoencoders">Variational Autoencoders</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#denoising-difussion-probabilistic-models-ddpm">2. Denoising Difussion Probabilistic Models (DDPM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling">Sampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-implementation-of-a-ddpm">Basic implementation of a DDPM</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-the-forward-process-noise-scheduler">Step 1: The forward process = Noise scheduler</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-the-backward-process-u-net">Step 2: The backward process = U-Net</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-the-loss">Step 3: The loss</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Sampling</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#score-based-generative-models">3. Score-based Generative Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-differential-equations">4. Stochastic Differential Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-generation">5. Conditional generation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classificer-guidance">Classificer guidance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classifier-free-guidance">Classifier-free guidance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-diffusion-models-for-unsupervised-explainability">6. Using Diffusion models for unsupervised explainability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="three-complementary-equivalent-formulations-of-difussion-models">
+<h1>Three complementary/equivalent formulations of Difussion models<a class="headerlink" href="#three-complementary-equivalent-formulations-of-difussion-models" title="Permalink to this heading">#</a></h1>
+<p>The field of generative modelling using Deep Learning (DL) is one of the most actives and abullient areas in Machine Learning (ML) these days. Apart from the models used in the context of Natural Language Processing, which are mainly based on Transformers and Recurrent Networks, most of the theoretical and applied works focuse on one of the following four architectures/formulations:</p>
+<ul class="simple">
+<li><p>Variational Auto-encoders (VAEs)</p></li>
+<li><p>Generative Adversarial Networks (GANs)</p></li>
+<li><p>Normalizing Flows (NF)</p></li>
+<li><p>Diffusion Models (DM)</p></li>
+</ul>
+<img src="img/GM2.png" width="400">
+<p style="text-align:center;">Image taken from [1]</p>
+<p>VAEs and GANs have been in the state of the art for many years, and although they are still in the core of new approaches, there is a concensus in the academic community that their development have achieved a plateau. Notwithstanding, VAEs and their many variants are still widely used alone or as part of more complex systems for image/audio generation as tools to embeb the input objects into a latent space where the generation process can be performed more efficiently and then decodify the generated embedded vector to final objects in the input space (see <a class="reference external" href="https://audioldm.github.io/">Audioldm</a> for an example). They are also a matter of study for the very interesting and vibrant field of physics-informed Neural Networks [2] and others [3].</p>
+<p>On the other hand, although NF (and Neural Network-based variants such as Autoregressive Flows) and DM have been present in the state of the art for many years, their applicability and potential for solving new theoretical and practical problems are in the core of many ongoing research.</p>
+<p>This notebook in intended to review the Difussion Models in detail, covering basic formulations and implementations, in order to understand the basics of DM, how the multiple formulations available connect each other and opening the door to address advanced topics which will be listed at the end of the lecture.</p>
+<p>Before starting with the basic definitions of DM, we are going to review fundamental concepts about Bayesian learning and variational inference, required to understand the mathematical formulation of DMs.</p>
+<section id="evidence-lower-bound">
+<h2>1. Evidence Lower Bound<a class="headerlink" href="#evidence-lower-bound" title="Permalink to this heading">#</a></h2>
+<p>In many ML problems, we can assume that the observed data is generated by an associated unseen laten variable <span class="math notranslate nohighlight">\(z\)</span>. Therefore, the distribution of the observed variable <span class="math notranslate nohighlight">\(x\)</span> and the laten variable could be modeled by the join distribution <span class="math notranslate nohighlight">\(p(x,z)\)</span>. There are two ways we can manipulate this joint distribution to recover the likelihood of purely observed p(x):</p>
+<ul class="simple">
+<li><p>Marginalize out the latent variable <span class="math notranslate nohighlight">\(z\)</span>: <span class="math notranslate nohighlight">\(p(x) = \int p(x,z)dz\)</span></p></li>
+<li><p>Use the change rule of probability: <span class="math notranslate nohighlight">\(p(x) = \frac{p(x,z)}{p(z|x)}\)</span></p></li>
+</ul>
+<p>In order to maximize the likelihood <span class="math notranslate nohighlight">\(p(x)\)</span> (the most common aim in ML training), each of the two options has its own challenges:</p>
+<ul class="simple">
+<li><p>The first option is difficult because it involves integrating out all latent variables z. which is intractable for complex models.</p></li>
+<li><p>The second option involves having access to a ground truth laten encoder <span class="math notranslate nohighlight">\(p(z|x)\)</span>, that is not available.</p></li>
+</ul>
+<p>Combining the two former equations we can derive a proxy objective, called Evidence Lower Bound (ELBO), with which to optimize a latent variable model [4].</p>
+<p>Let’s <span class="math notranslate nohighlight">\(q_{\phi}(z|x)\)</span> be a flexible aproximate variational distribution with parameters <span class="math notranslate nohighlight">\(\phi\)</span> that we seek to optimize; the ELBO can be derive as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\log p(x) &amp; = \log \int p(x,z) dz\\
+&amp; = \log \int \frac{p(x,z)q_{\phi}(z|x)}{q_{\phi}(z|x)}\\
+&amp; = \log \mathbb{E}_{q_{\phi}(z|x)} \left[\frac{p(x,z)}{q_{\phi}(z|x)}\right]\\
+&amp; \geq \mathbb{E}_{q_{\phi}(z|x)} \left[\log \frac{p(x,z)}{q_{\phi}(z|x)}\right]
+\end{split}
+\end{split}\]</div>
+<p>This derivation of the ELBO does not give us a clear idea of why we want to maximize it as an objective. Let’s look at an alternative derivation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\log p(x) &amp; = \log p(x) \int q_{\phi}(z|x)dz\\
+&amp; =  \int q_{\phi}(z|x)(\log p(x))dz\\
+&amp; = \mathbb{E}_{q_{\phi}(z|x)} \left[\log p(x)\right]\\
+&amp; = \mathbb{E}_{q_{\phi}(z|x)} \left[\log \frac{p(x,z)}{p(z|x)}\right]\\
+&amp; = \mathbb{E}_{q_{\phi}(z|x)} \left[\log \frac{p(x,z)}{p(z|x)}\frac{q_{\phi}(z|x)}{q_{\phi}(z|x)}\right]\\
+&amp; = \mathbb{E}_{q_{\phi}(z|x)} \left[\log \frac{p(x,z)}{q_{\phi}(z|x)}\right] + \mathbb{E}_{q_{\phi}(z|x)} \left[\log \frac{q_{\phi}(z|x)}{p(z|x)}\right]\\
+&amp; = \mathbb{E}_{q_{\phi}(z|x)} \left[\log \frac{p(x,z)}{q_{\phi}(z|x)}\right] + D_{KL}(q_{\phi}(z|x)\|p(z|x))\\
+&amp; \geq \mathbb{E}_{q_{\phi}(z|x)} \left[\log \frac{p(x,z)}{q_{\phi}(z|x)}\right]
+\end{split}
+\end{split}\]</div>
+<p>From this derivarion it is easy to observe that the ELBO is a lower bound for the evidence; since the KL term is not negative the ELBO can never exceed the evidence.</p>
+<p>In order to obtain a model that represents the latent structure of the data, the goal is then to learn the paramters of the variation posterior <span class="math notranslate nohighlight">\(q_{\phi}(z|x)\)</span> such that it matches the true posterior distribution <span class="math notranslate nohighlight">\(p(z|x)\)</span>, which is achieved by minimizing the KL divergence term. Unfourtunately, such a minimization cannot be done directly because we do not have acces to the ground truth <span class="math notranslate nohighlight">\(p(z|x)\)</span> distribution. However, as the left hand side of the former equation (the evidence) does not depend on <span class="math notranslate nohighlight">\(\phi\)</span>, the right hand side sum up to a constant. Therefore, any maximization of the ELBO with respect to <span class="math notranslate nohighlight">\(\phi\)</span> necessarily invokes an equal minimization of the KL divergence term [4].</p>
+<section id="variational-autoencoders">
+<h3>Variational Autoencoders<a class="headerlink" href="#variational-autoencoders" title="Permalink to this heading">#</a></h3>
+<p>As an example, we are going to use the former ELBO definition to derive the objective function used in VAEs, which is a well-known model.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\mathbb{E}_{q_{\phi}({\bf{z}}|{\bf{x}})} \left[\log \frac{p({\bf{x}},{\bf{z}})}{q_{\phi}({\bf{z}}|{\bf{x}})}\right] &amp; = \mathbb{E}_{q_{\phi}({\bf{z}}|{\bf{x}})} \left[\log \frac{p_{\theta}({\bf{x}}|{\bf{z}})p(\bf{z})}{q_{\phi}({\bf{z}}|{\bf{x}})}\right]\\
+&amp; = \mathbb{E}_{q_{\phi}({\bf{z}}|{\bf{x}})} \left[\log p_{\theta}({\bf{x}}|{\bf{z}})\right] + \mathbb{E}_{q_{\phi}({\bf{z}}|{\bf{x}})} \left[\log \frac{p({\bf{z}})}{q_{\phi}({\bf{z}}|{\bf{x}})}\right]\\
+&amp; = \mathbb{E}_{q_{\phi}({\bf{z}}|{\bf{x}})} \left[\log p_{\theta}({\bf{x}}|{\bf{z}})\right] - D_{KL}(q_{\phi}({\bf{z}}|{\bf{x}})\|p({\bf{z}}))
+\end{split}
+\end{split}\]</div>
+<p>The first term is then the reconstruction error and the second term is the KL divergence between the variational distribution and the prior distribution that is tipically assumed as <span class="math notranslate nohighlight">\(\mathcal{N}({\bf{0}},{\bf{I}})\)</span>. During training, the model simultanously learns the intermediate bottlenecking distribution <span class="math notranslate nohighlight">\(q_{\phi}({\bf{z}}|{\bf{x}})\)</span> that can be treated as an encoder, and the parameters <span class="math notranslate nohighlight">\(\theta\)</span> of the deterministic function <span class="math notranslate nohighlight">\(p_{\theta}({\bf{x}}|{\bf{z}})\)</span> that converts a given latent vector <span class="math notranslate nohighlight">\(\bf{z}\)</span> into an observation <span class="math notranslate nohighlight">\(\bf{x}\)</span> (called Decoder).</p>
+</section>
+</section>
+<section id="denoising-difussion-probabilistic-models-ddpm">
+<h2>2. Denoising Difussion Probabilistic Models (DDPM)<a class="headerlink" href="#denoising-difussion-probabilistic-models-ddpm" title="Permalink to this heading">#</a></h2>
+<img src="img/DDPM.png" width="600">
+<p style="text-align:center;">Image taken from [5]</p>
+<p>A diffusion probabilistic model is composed of two Markov chain:</p>
+<ul class="simple">
+<li><p>A forward (noising) process, which is a Markov chain that gradually adds noise to the data until the signal is destroyed.</p></li>
+<li><p>A reverse (denoising) process, which is a parameterized Markov chain whise transitions are learned to reverse the diffusion process.</p></li>
+</ul>
+<p>A DDPM is a simplified Hierarchical Variational Autoencoder (or Recursive VAE) [4], where the dimension of the latent dimension is exactly equal to the data dimension, the structure of the latent encoder is not learned and the Gaussian parameters of the latent encoders vary over time.</p>
+<p>Let’s <span class="math notranslate nohighlight">\({\bf{x}}_t\)</span> a latent variable, where <span class="math notranslate nohighlight">\(t=0\)</span> represents true data samples and <span class="math notranslate nohighlight">\(t\in[1,T]\)</span> represents a corresponding latent with hierarchy indexed by <span class="math notranslate nohighlight">\(t\)</span>. By considering the Markov condition, the posterior distribution of the forward process can be written as:</p>
+<div class="math notranslate nohighlight">
+\[
+q({\bf{x}}_{1:T}|{\bf{x}}_0) = \prod_{t=1}^T q({\bf{x}}_t|{\bf{x}}_{t-1})
+\]</div>
+<p>As pointed out before, the structure of the latent encoder at each timestep <span class="math notranslate nohighlight">\(t\)</span> is no learned, but it is fixed as a linear Gaussian model, where the mean and standard deviation are typically set to predefined values that change deterministically over time (they can also be treated as parameters and learned during training [6]). Thus, the Gaussian encoder is defined to preserve the variance during the forward process:</p>
+<div class="math notranslate nohighlight">
+\[
+q({\bf{x}}_t|{\bf{x}}_{t-1}) = \mathcal{N}({\bf{x}}_{T};\sqrt{\alpha_t}{\bf{x}}_{t-1},(1-\alpha_t){\bf{I}})
+\]</div>
+<p>The joint distribution of the DDPM is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+p({\bf{x}}_{0:T}) = p({\bf{x}}_T)\prod_{t=1}^T p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t})
+\]</div>
+<p>Under the assumption that the evolution of <span class="math notranslate nohighlight">\(\alpha_t\)</span> over time produces a final latent distribution <span class="math notranslate nohighlight">\(p({\bf{x}}_T)\)</span> equal to a standard Gaussian <span class="math notranslate nohighlight">\(\mathcal{N}({\bf{x}}_T;{\bf{0}},{\bf{I}})\)</span>.</p>
+<p>A notable property of the forward process is that it admits sampling <span class="math notranslate nohighlight">\({\bf{x}}_{t}\)</span> at an arbitrary timestep <span class="math notranslate nohighlight">\(t\)</span> in closed form. Let’s see how.</p>
+<p>Using the reparameterization trick is easy to see that sampling <span class="math notranslate nohighlight">\({\bf{x}}_t \sim q({\bf{x}}_t|{\bf{x}}_{t-1})\)</span> is equivalent to:</p>
+<div class="math notranslate nohighlight">
+\[{\bf{x}}_t = \sqrt{\alpha_t}{\bf{x}}_{t-1} + \sqrt{1-\alpha_t}\mathbf{\epsilon}_{t-1}; \;\; \mathbf{\epsilon}_{t-1} \sim \mathcal{N}({\bf{0}},{\bf{I}})\]</div>
+<p>Now, we would like to get <span class="math notranslate nohighlight">\({\bf{x}}_t\)</span> samples without having to estimate <span class="math notranslate nohighlight">\({\bf{x}}_{t-1}\)</span> but using directly the true sample <span class="math notranslate nohighlight">\({\bf{x}}_0\)</span>. Therefore,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+{\bf{x}}_t &amp; = \sqrt{\alpha_t}{\bf{x}}_{t-1} + \sqrt{1-\alpha_t}{\mathbf{\epsilon}}_{t-1}\\
+           &amp; = \sqrt{\alpha_t}\left( \sqrt{\alpha_{t-1}}{\bf{x}}_{t-2} + \sqrt{1-\alpha_{t-1}}\mathbf{\epsilon}_{t-2} \right) + \sqrt{1-\alpha_t}\mathbf{\epsilon}_{t-1}\\
+           &amp; = \sqrt{\alpha_t\alpha_{t-1}}{\bf{x}}_{t-2} + \underbrace{\sqrt{\alpha_t-\alpha_t\alpha_{t-1}}\epsilon_{t-2} + \sqrt{1-\alpha_t}\mathbf{\epsilon}_{t-1}}_{\text{Equivalent to the sum of two Gaussians with mean = $\bf{0}$ and different variance}}\\
+           &amp; = \sqrt{\alpha_t\alpha_{t-1}}{\bf{x}}_{t-2} + \sqrt{\sqrt{\alpha_t-\alpha_t\alpha_{t-1}}^2 + \sqrt{1-\alpha_t}^2}\epsilon_{t-2}\\
+           &amp; =\sqrt{\alpha_t\alpha_{t-1}}{\bf{x}}_{t-2} + \sqrt{1-\alpha_t\alpha_t-1}\mathbf{\epsilon}_{t-2}\\
+           &amp; = \cdots\\
+           &amp; = \sqrt{\prod_{i=1}^t \alpha_i} {\bf{x}}_{0} + \sqrt{1 - \prod_{i=1}^t \alpha_i}\mathbf{\epsilon}_{0}\\
+           &amp; = \sqrt{\bar{\alpha}_t}{\bf{x}}_{0} + \sqrt{1 -\bar{\alpha}_t}\mathbf{\epsilon}_{0}\\
+           &amp;\sim \mathcal{N}({\bf{x}}_{t};\sqrt{\bar{\alpha}_t}{\bf{x}}_{0},(1 -\bar{\alpha}_t){\bf{I}})
+\end{split}
+\end{split}\]</div>
+<p>Now, let’s try to apply the ELBO to DDPMs in order to find a loss function to optimize [4]:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\log p({\bf{x}}_{0:T}) &amp; = \log \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\frac{p({\bf{x}}_{0:T})}{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\right]\\
+&amp; \geq \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_{0:T})}{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\right]\\
+&amp; = \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_T)\prod_{t=1}^T p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t})}{\prod_{t=1}^T q({\bf{x}}_t|{\bf{x}}_{t-1})}\right]\\
+&amp; = \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_T)p_{\theta}({\bf{x}}_0|{\bf{x}}_1)\prod_{t=2}^{T} p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t})}{q({\bf{x}}_T|{\bf{x}}_{T-1})\prod_{t=1}^{T-1} q({\bf{x}}_t|{\bf{x}}_{t-1})}\right]\\
+&amp; = \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_T)p_{\theta}({\bf{x}}_0|{\bf{x}}_1)\prod_{t=1}^{T-1} p_{\theta}({\bf{x}}_{t}|{\bf{x}}_{t+1})}{q({\bf{x}}_T|{\bf{x}}_{T-1})\prod_{t=1}^{T-1} q({\bf{x}}_t|{\bf{x}}_{t-1})}\right]\\
+&amp;=\mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_T)p_{\theta}({\bf{x}}_0|{\bf{x}}_1)}{q({\bf{x}}_T|{\bf{x}}_{T-1})}\right] + \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \prod_{t=1}^{T-1} \frac{p_{\theta}({\bf{x}}_{t}|{\bf{x}}_{t+1})}{q({\bf{x}}_t|{\bf{x}}_{t-1})}\right]\\
+&amp;= \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log p_{\theta}({\bf{x}}_0|{\bf{x}}_1)\right] + \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_{T})}{q({\bf{x}}_T|{\bf{x}}_{T-1})}\right] + \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[ \sum_{t=1}^{T-1} \log \frac{p_{\theta}({\bf{x}}_{t}|{\bf{x}}_{t+1})}{q({\bf{x}}_t|{\bf{x}}_{t-1})} \right]\\
+&amp;=\mathbb{E}_{q({\bf{x}}_{1}|{\bf{x}}_0)}\left[\log p_{\theta}({\bf{x}}_0|{\bf{x}}_1)\right] + \mathbb{E}_{q({\bf{x}}_{T-1},{\bf{x}}_{T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_{T})}{q({\bf{x}}_T|{\bf{x}}_{T-1})}\right] + \sum_{t=1}^{T-1} \mathbb{E}_{q({\bf{x}}_{t-1},{\bf{x}}_{t},{\bf{x}}_{t+1}|{\bf{x}}_0)}\left[\log \frac{p_{\theta}({\bf{x}}_{t}|{\bf{x}}_{t+1})}{q({\bf{x}}_t|{\bf{x}}_{t-1})} \right]\\
+&amp; = \underbrace{\mathbb{E}_{q({\bf{x}}_{1}|{\bf{x}}_0)}\left[\log p_{\theta}({\bf{x}}_0|{\bf{x}}_1)\right]}_{\text{reconstruction term}} - \underbrace{\mathbb{E}_{q({\bf{x}}_{T-1}|{\bf{x}}_0)}\left[D_{KL}(q({\bf{x}}_{T}|{\bf{x}}_{T-1})\|p({\bf{x}}_{T}))\right]}_{\text{prior matching term}} - \sum_{t=1}^{T-1} \underbrace{\mathbb{E}_{q({\bf{x}}_{t-1},{\bf{x}}_{t+1}|{\bf{x}}_0)}\left[D_{KL}(q({\bf{x}}_t|{\bf{x}}_{t-1})\|p_{\theta}({\bf{x}}_{t}|{\bf{x}}_{t+1}))\right]}_{\text{consistency term}}
+\end{split}
+\end{split}\]</div>
+<p>The terms that constitute the former ELBO can be interpreted as [4]:</p>
+<ul class="simple">
+<li><p>The <em>reconstruction term</em> predicts the log probability of the original data sample given the first-step latent. This is equivalent to the reconstruction term in the VAE formulation.</p></li>
+<li><p>The <em>prior matching term</em> is also similar to that of the VAE and is minimized when the the final latent distribution is Gaussian. But, unlike VAE, this term requires no optimization, as it has no trainable paramters.</p></li>
+<li><p>The <em>consistency term</em> atttempts to make the distribution at <span class="math notranslate nohighlight">\({\bf{x}}_{t}\)</span> consistent, from both forward and backward processes. “That is, a denoising step from a noisier image should match the corresponding noising step from a cleaner image, for every intermediate timestep; this is reflected mathematically by the KL Divergence”.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\require{cancel}\]</div>
+<p>The consistency term in the former formulation, although interpretable, is hard to compute since it requires computing expectation over two random variables <span class="math notranslate nohighlight">\(\{{\bf{x}}_{t-1},{\bf{x}}_{t+1}\}\)</span> for every time step. Moreover, the variance of the ELBO may be large, as it is computed by summing up <span class="math notranslate nohighlight">\(T-1\)</span> terms. However, there is an alternative formulation that uses a mathematical trick based on the Markov property of the process. The key insight is that the encoder transitions <span class="math notranslate nohighlight">\(q({\bf{x}}_{t}|{\bf{x}}_{t-1}) = q({\bf{x}}_{t}|{\bf{x}}_{t-1}, {\bf{x}}_{0})\)</span>, where the extra conditioning variable is redundant due to the Markov property.</p>
+<p>According to the Bayes rule:
+$<span class="math notranslate nohighlight">\(
+q({\bf{x}}_{t}|{\bf{x}}_{t-1}, {\bf{x}}_{0}) = \frac{q({\bf{x}}_{t-1}|{\bf{x}}_{t}, {\bf{x}}_{0})q({\bf{x}}_{t}|{\bf{x}}_{0})}{q({\bf{x}}_{t-1}|{\bf{x}}_{0})}
+\)</span>$</p>
+<p>Now, let’s derive the ELBO again [4]:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\log p({\bf{x}}_{0:T}) &amp; \geq \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_{0:T})}{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\right]\\
+&amp; = \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_T)\prod_{t=1}^T p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t})}{\prod_{t=1}^T q({\bf{x}}_t|{\bf{x}}_{t-1})}\right]\\
+&amp; = \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_T)p_{\theta}({\bf{x}}_0|{\bf{x}}_1)\prod_{t=2}^{T} p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t})}{q({\bf{x}}_1|{\bf{x}}_{0})\prod_{t=2}^{T} q({\bf{x}}_t|{\bf{x}}_{t-1})}\right]\\
+&amp; = \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_T)p_{\theta}({\bf{x}}_0|{\bf{x}}_1)\prod_{t=2}^{T} p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t})}{q({\bf{x}}_1|{\bf{x}}_{0})\prod_{t=2}^{T} q({\bf{x}}_t|{\bf{x}}_{t-1}, {\bf{x}}_{0})}\right]\\
+&amp; = \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_T)p_{\theta}({\bf{x}}_0|{\bf{x}}_1)}{q({\bf{x}}_1|{\bf{x}}_{0})} + \log \prod_{t=2}^T \frac{p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t})}{q({\bf{x}}_t|{\bf{x}}_{t-1}, {\bf{x}}_{0})}\right]\\
+&amp; = \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_T)p_{\theta}({\bf{x}}_0|{\bf{x}}_1)}{q({\bf{x}}_1|{\bf{x}}_{0})} + \log \prod_{t=2}^T \frac{p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t})}{\frac{q({\bf{x}}_{t-1}|{\bf{x}}_{t},{\bf{x}}_{0})q({\bf{x}}_{t}|{\bf{x}}_{0})}{q({\bf{x}}_{t-1}|{\bf{x}}_{0})}}\right]\\
+&amp;= \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_T)p_{\theta}({\bf{x}}_0|{\bf{x}}_1)}{q({\bf{x}}_1|{\bf{x}}_{0})} + \log \prod_{t=2}^T \frac{q({\bf{x}}_{t-1}|{\bf{x}}_{0})}{q({\bf{x}}_{t}|{\bf{x}}_{0})} + \log \prod_{t=2}^T \frac{p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t})}{q({\bf{x}}_{t-1}|{\bf{x}}_{t},{\bf{x}}_{0})} \right]\\
+&amp;= \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_T)p_{\theta}({\bf{x}}_0|{\bf{x}}_1)}{q({\bf{x}}_1|{\bf{x}}_{0})} + \underbrace{\sum_{t=2}^T \log  \frac{q({\bf{x}}_{t-1}|{\bf{x}}_{0})}{q({\bf{x}}_{t}|{\bf{x}}_{0})}}_{\text{telescopic summation}} + \sum_{t=2}^T \log  \frac{p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t})}{q({\bf{x}}_{t-1}|{\bf{x}}_{t},{\bf{x}}_{0})} \right]\\
+&amp;= \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_T)p_{\theta}({\bf{x}}_0|{\bf{x}}_1)}{\cancel{q({\bf{x}}_1|{\bf{x}}_{0})}} + \log \frac{\cancel{q({\bf{x}}_{1}|{\bf{x}}_0)}}{q({\bf{x}}_{T}|{\bf{x}}_0)} + \sum_{t=2}^T \log  \frac{p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t})}{q({\bf{x}}_{t-1}|{\bf{x}}_{t},{\bf{x}}_{0})} \right]\\
+&amp;= \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_T)p_{\theta}({\bf{x}}_0|{\bf{x}}_1)}{q({\bf{x}}_T|{\bf{x}}_{0})} + \sum_{t=2}^T \log  \frac{p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t})}{q({\bf{x}}_{t-1}|{\bf{x}}_{t},{\bf{x}}_{0})} \right]\\
+&amp;= \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log p_{\theta}({\bf{x}}_0|{\bf{x}}_1)\right] + \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_{T})}{q({\bf{x}}_T|{\bf{x}}_{0})}\right] + \sum_{t=2}^T \mathbb{E}_{q({\bf{x}}_{1:T}|{\bf{x}}_0)}\left[\log  \frac{p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t})}{q({\bf{x}}_{t-1}|{\bf{x}}_{t},{\bf{x}}_{0})} \right]\\
+&amp;= \mathbb{E}_{q({\bf{x}}_{1}|{\bf{x}}_0)}\left[\log p_{\theta}({\bf{x}}_0|{\bf{x}}_1)\right] + \mathbb{E}_{q({\bf{x}}_{T}|{\bf{x}}_0)}\left[\log \frac{p({\bf{x}}_{T})}{q({\bf{x}}_T|{\bf{x}}_{0})}\right] + \sum_{t=2}^T \mathbb{E}_{q({\bf{x}}_{t},{\bf{x}}_{t-1}|{\bf{x}}_0)}\left[\log  \frac{p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t})}{q({\bf{x}}_{t-1}|{\bf{x}}_{t},{\bf{x}}_{0})} \right]\\
+&amp; = \underbrace{\mathbb{E}_{q({\bf{x}}_{1}|{\bf{x}}_0)}\left[\log p_{\theta}({\bf{x}}_0|{\bf{x}}_1)\right]}_{\text{reconstruction term}} - \underbrace{D_{KL}(q({\bf{x}}_{T}|{\bf{x}}_{0})\|p({\bf{x}}_{T}))}_{\text{prior matching term}} - \sum_{t=2}^{T} \underbrace{\mathbb{E}_{q({\bf{x}}_{t}|{\bf{x}}_0)}\left[D_{KL}(q({\bf{x}}_{t-1}|{\bf{x}}_{t},{\bf{x}}_{0})\|p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t}))\right]}_{\text{denoising matching term}}
+\end{split}
+\end{split}\]</div>
+<p>This terms can also be interpretes as before [4]:</p>
+<ul class="simple">
+<li><p>The <em>reconstruction term</em> is exactly the same as before. By considering that the last term sums up <span class="math notranslate nohighlight">\(T-1\)</span> terms, this term can be neglected.</p></li>
+<li><p>The <em>prior matching term</em> represents how close the distribution of the final noisified input is to the standard Gaussian prior. It has no trainable parameters, and is also equal to zero under our assumptions.</p></li>
+<li><p>The <em>denoising matching term</em> uses <span class="math notranslate nohighlight">\(q({\bf{x}}_{t-1}|{\bf{x}}_{t},{\bf{x}}_{0})\)</span> as a ground truth to learn <span class="math notranslate nohighlight">\(p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t})\)</span>. The ground truth “defines how to denoise a noisy sample <span class="math notranslate nohighlight">\({\bf{x}}_{t}\)</span>  with access to what the final, completely denoised sample <span class="math notranslate nohighlight">\({\bf{x}}_{0}\)</span> should be” [4].</p></li>
+</ul>
+<p>Now, let’s dig deeper inside the denoising matching term. Remeber that <span class="math notranslate nohighlight">\(q({\bf{x}}_{t}|{\bf{x}}_{0}) = \mathcal{N}({\bf{x}}_{t};\sqrt{\bar{\alpha}_t}{\bf{x}}_{0},(1 -\bar{\alpha}_t){\bf{I}})\)</span>, so using the Bayes rule</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+q({\bf{x}}_{t-1}|{\bf{x}}_{t}, {\bf{x}}_{0}) &amp;= \frac{q({\bf{x}}_{t}|{\bf{x}}_{t-1}, {\bf{x}}_{0})q({\bf{x}}_{t-1}|{\bf{x}}_{0})}{q({\bf{x}}_{t}|{\bf{x}}_{0})}\\
+&amp;= \frac{\mathcal{N}({\bf{x}}_{t};\sqrt{\alpha_t}{\bf{x}}_{t-1},(1 -\alpha_t){\bf{I}})\mathcal{N}({\bf{x}}_{t-1};\sqrt{\bar{\alpha}_{t-1}}{\bf{x}}_{0},(1 -\bar{\alpha}_{t-1}){\bf{I}})}{\mathcal{N}({\bf{x}}_{t};\sqrt{\bar{\alpha}_t}{\bf{x}}_{0},(1 -\bar{\alpha}_t){\bf{I}})}\\
+&amp;=... \\
+&amp;\propto \mathcal{N}({\bf{x}}_{t-1}; \tilde{\mathbf{\mu}}_t({\bf{x}}_{t},{\bf{x}}_{0}),\tilde{\mathbf{\Sigma}}_t)
+\end{split}
+\end{split}\]</div>
+<p>where [4],
+$<span class="math notranslate nohighlight">\(
+\tilde{\mathbf{\mu}}_t({\bf{x}}_{t},{\bf{x}}_{0}) = \frac{\sqrt{\alpha_t}(1 - \bar{\alpha}_{t-1}){\bf{x}}_t + \sqrt{\bar{\alpha}_{t-1}}(1-\bar{\alpha}_{t}){\bf{x}}_0}{1-\bar{\alpha}_t}
+\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(
+\tilde{\mathbf{\Sigma}}_t = \frac{(1-\alpha_t)(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t}{\bf{I}} = \tilde{\sigma}_t^2{\bf{I}}
+\)</span>$</p>
+<p><strong>Reversibility of Gaussian Distributions</strong>: One of the essential properties of Gaussian distributions is that they are closed under linear transformations and convolution with other Gaussians. Since the forward process involves adding Gaussian noise (which is a convolution operation), the reverse process essentially “removes” that noise. Because Gaussians are closed under these operations, the reverse process remains Gaussian (see <a class="reference external" href="https://en.wikipedia.org/wiki/Sum_of_normally_distributed_random_variables">Wikipedia</a> for a proof.).</p>
+<p>Therefore, we can assume that <span class="math notranslate nohighlight">\(p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t}) = \mathcal{N}(\mu_{\theta}({\bf{x}}_{t},t),\sigma_{\theta}^2{\bf{I}})\)</span>. Furthermore, as all <span class="math notranslate nohighlight">\(\alpha\)</span> terms are known to be frozen at each timestep we can immediately construct the variance of the approximate denoising transition step to also be <span class="math notranslate nohighlight">\(\sigma_{\theta}^2{\bf{I}} = \tilde{\sigma}_t^2{\bf{I}} = \Sigma_t\)</span>.</p>
+<p>The KL divergence between two multivariate Gaussian distributions is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+D_{KL}\left(\mathcal{N}({\bf{x}};\mu_{\bf{x}},\Sigma_{\bf{x}})\|\mathcal{N}({\bf{y}};\mu_{\bf{y}},\Sigma_{\bf{y}}) \right) = \frac{1}{2}\left[ \log \frac{|\Sigma_{\bf{y}}|}{|\Sigma_{\bf{x}}|} - d + \text{tr}\left( \Sigma_{\bf{y}}^{-1}\Sigma_{\bf{x}}\right) + (\mu_{\bf{y}} - \mu_{\bf{x}})^\top \Sigma_{\bf{y}}^{-1} (\mu_{\bf{y}} - \mu_{\bf{x}})\right]
+\]</div>
+<p>So,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+&amp;\underset{\theta}{\arg\min} D_{KL}(q({\bf{x}}_{t-1}|{\bf{x}}_{t},{\bf{x}}_{0})\|p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t}))\\
+= &amp; \underset{\theta}{\arg\min} D_{KL}(\mathcal{N}({\bf{x}}_{t-1};\tilde{\mathbf{\mu}}_t({\bf{x}}_{t},{\bf{x}}_{0}),\Sigma_{t})\|\mathcal{N}({\bf{x}}_{t-1};\mu_{\theta}({\bf{x}}_{t},t),\Sigma_{t})\\
+= &amp; ...\\
+= &amp; \underset{\theta}{\arg\min} \frac{1}{2\tilde{\sigma}_t^2} \left[ \|\mu_{\theta}({\bf{x}}_{t},t) - \tilde{\mathbf{\mu}}_t({\bf{x}}_{t},{\bf{x}}_{0})\|_2^2\right]
+\end{split}
+\end{split}\]</div>
+<p>We can simplify the former expression even more. Considering that <span class="math notranslate nohighlight">\(\mu_{\theta}({\bf{x}}_{t},t)\)</span> conditions on <span class="math notranslate nohighlight">\({\bf{x}}_{t}\)</span>, as <span class="math notranslate nohighlight">\(\tilde{\mathbf{\mu}}_t({\bf{x}}_{t},{\bf{x}}_{0})\)</span> does; we can set <span class="math notranslate nohighlight">\(\mu_{\theta}({\bf{x}}_{t},t)\)</span> to closely math the definition of <span class="math notranslate nohighlight">\(\tilde{\mathbf{\mu}}_t({\bf{x}}_{t},{\bf{x}}_{0})\)</span> using the following form:</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_{\theta}({\bf{x}}_{t},t) = \frac{\sqrt{\alpha_t}(1 - \bar{\alpha}_{t-1}){\bf{x}}_t + \sqrt{\bar{\alpha}_{t-1}}(1-\bar{\alpha}_{t}){\hat{\bf{x}}}_{\theta}({\bf{x}}_{t},t)}{1-\bar{\alpha}_t}
+\]</div>
+<p>So now,
+$<span class="math notranslate nohighlight">\(
+\begin{split}
+&amp;\underset{\theta}{\arg\min} D_{KL}(q({\bf{x}}_{t-1}|{\bf{x}}_{t},{\bf{x}}_{0})\|p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t}))\\
+= &amp; \underset{\theta}{\arg\min} \frac{1}{2\tilde{\sigma}_t^2} \frac{\bar{\alpha}_{t-1}(1 - \alpha_t)^2}{(1 - \bar{\alpha}_{t})^2}\left[\| {\hat{\bf{x}}}_{\theta}({\bf{x}}_{t},t) - {\bf{x}}_{0}\|_2^2\right]
+\end{split}
+\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\({\hat{\bf{x}}}_{\theta}({\bf{x}}_{t},t)\)</span> is a function approximator (i.e. an artificial neural network).</p>
+<p><strong>Equivalently</strong>, recall that <span class="math notranslate nohighlight">\({\bf{x}}_{t} = \sqrt{\bar{\alpha}_t}{\bf{x}}_{0} + \sqrt{1 -\bar{\alpha}_t}\mathbf{\epsilon}\)</span>. Thus, solving for <span class="math notranslate nohighlight">\({\bf{x}}_{0}\)</span>:
+$<span class="math notranslate nohighlight">\(
+{\bf{x}}_{0} = \frac{1}{\sqrt{\bar{\alpha}}_t}({\bf{x}}_{t} - \sqrt{1 - \bar{\alpha}_t}\epsilon)
+\)</span><span class="math notranslate nohighlight">\(
+Plugin the former equation in:
+\)</span><span class="math notranslate nohighlight">\(
+\begin{split}
+\tilde{\mathbf{\mu}}_t({\bf{x}}_{t},{\bf{x}}_{0}) &amp; = \frac{\sqrt{\alpha_t}(1 - \bar{\alpha}_{t-1}){\bf{x}}_t + \sqrt{\bar{\alpha}_{t-1}}(1-\bar{\alpha}_{t}){\bf{x}}_0}{1-\bar{\alpha}_t}\\
+&amp; = \frac{1}{\sqrt{\alpha_t}}\left({\bf{x}}_{t} - \frac{1- \alpha_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon \right)
+\end{split}
+\)</span>$</p>
+<p>Thefore, similar to the previous analysis, we could assume that <span class="math notranslate nohighlight">\(\mu_{\theta}({\bf{x}}_{t},t)\)</span> takes the form:</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_{\theta}({\bf{x}}_{t},t) =  \frac{1}{\sqrt{\alpha_t}}\left({\bf{x}}_{t} - \frac{1- \alpha_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_{\theta}({\bf{x}}_{t},t) \right)
+\]</div>
+<p>and instead of predicting <span class="math notranslate nohighlight">\({\bf{x}}_{0}\)</span> from a noisy version corrupted by <span class="math notranslate nohighlight">\(t\)</span> steps of the forward process, we try to predict the noise. The loss function can then be written as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+&amp;\underset{\theta}{\arg\min} D_{KL}(q({\bf{x}}_{t-1}|{\bf{x}}_{t},{\bf{x}}_{0})\|p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t}))\\
+= &amp; \underset{\theta}{\arg\min} \frac{1}{2\tilde{\sigma}_t^2} \frac{(1 - \alpha_t)^2}{(1 - \bar{\alpha}_{t})\alpha_t}\left[\| \epsilon - \epsilon_{\theta}({\bf{x}}_{t},t)\|_2^2\right]\\
+= &amp; \underset{\theta}{\arg\min} \frac{1}{2\tilde{\sigma}_t^2} \frac{(1 - \alpha_t)^2}{(1 - \bar{\alpha}_{t})\alpha_t}\left[\| \epsilon - \epsilon_{\theta}(\sqrt{\bar{\alpha}_t}{\bf{x}}_{0} + \sqrt{1 -\bar{\alpha}_t}\mathbf{\epsilon},t)\|_2^2\right]
+\end{split}
+\end{split}\]</div>
+<p>According to [5], neglecting the weighting term produces better results.</p>
+<section id="sampling">
+<h3>Sampling<a class="headerlink" href="#sampling" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+{\bf{x}}_{t-1} = \frac{1}{\sqrt{\alpha_t}}\left({\bf{x}}_{t} - \frac{1- \alpha_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_{\theta}({\bf{x}}_{t},t) \right) + \sigma_t \epsilon \sim \mathcal{N}({\bf 0}, {\bf I})
+\]</div>
+<p>The first term is the mean of <span class="math notranslate nohighlight">\(p_{\theta}({\bf{x}}_{t-1}|{\bf{x}}_{t})\)</span>, but it is deterministic, so its variance is 0. That’s why suming <span class="math notranslate nohighlight">\(\sigma_t \epsilon\)</span> is equivalent to sampling from <span class="math notranslate nohighlight">\(\mathcal{N}(\mu_{\theta}({\bf{x}}_{t},t),\sigma_t {\bf I})\)</span>.</p>
+</section>
+<section id="basic-implementation-of-a-ddpm">
+<h3>Basic implementation of a DDPM<a class="headerlink" href="#basic-implementation-of-a-ddpm" title="Permalink to this heading">#</a></h3>
+<p>As dataset we use the StandordCars Dataset, which consists of around 8000 images in the train set. Let’s see if this is enough to get good results ;-)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install opendatasets --upgrade --quiet</span>
+
+<span class="kn">import</span> <span class="nn">opendatasets</span> <span class="k">as</span> <span class="nn">od</span>
+
+<span class="n">dataset_url</span> <span class="o">=</span> <span class="s1">&#39;https://www.kaggle.com/jutrera/stanford-car-dataset-by-classes-folder&#39;</span>
+<span class="n">od</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">dataset_url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Please provide your Kaggle credentials to download this dataset. Learn more: http://bit.ly/kaggle-creds
+Your Kaggle username: jdariasl
+Your Kaggle Key: ········
+Dataset URL: https://www.kaggle.com/datasets/jutrera/stanford-car-dataset-by-classes-folder
+Downloading stanford-car-dataset-by-classes-folder.zip to ./stanford-car-dataset-by-classes-folder
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1.83G/1.83G [02:48&lt;00:00, 11.7MB/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">transforms</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span> <span class="nn">torchvision.datasets</span> <span class="kn">import</span> <span class="n">ImageFolder</span>
+<span class="kn">from</span> <span class="nn">torchvision.transforms</span> <span class="kn">import</span> <span class="n">ToTensor</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">from</span> <span class="nn">torch.optim</span> <span class="kn">import</span> <span class="n">Adam</span>
+<span class="kn">import</span> <span class="nn">math</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DATA_DIR_TRAIN</span> <span class="o">=</span> <span class="s1">&#39;./stanford-car-dataset-by-classes-folder/car_data/car_data/train&#39;</span>
+<span class="n">train_classes</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">DATA_DIR_TRAIN</span><span class="p">)</span>
+
+<span class="n">DATA_DIR_TEST</span> <span class="o">=</span> <span class="s1">&#39;./stanford-car-dataset-by-classes-folder/car_data/car_data/test&#39;</span>
+<span class="n">test_classes</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">DATA_DIR_TEST</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_classes</span><span class="p">[:</span><span class="mi">5</span><span class="p">],</span> <span class="n">test_classes</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;Ford Expedition EL SUV 2009&#39;,
+  &#39;BMW M5 Sedan 2010&#39;,
+  &#39;Chevrolet Silverado 1500 Classic Extended Cab 2007&#39;,
+  &#39;MINI Cooper Roadster Convertible 2012&#39;,
+  &#39;Aston Martin V8 Vantage Convertible 2012&#39;],
+ [&#39;Ford Expedition EL SUV 2009&#39;,
+  &#39;BMW M5 Sedan 2010&#39;,
+  &#39;Chevrolet Silverado 1500 Classic Extended Cab 2007&#39;,
+  &#39;MINI Cooper Roadster Convertible 2012&#39;,
+  &#39;Aston Martin V8 Vantage Convertible 2012&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_dataset</span> <span class="o">=</span> <span class="n">ImageFolder</span><span class="p">(</span><span class="n">DATA_DIR_TRAIN</span><span class="p">,</span> <span class="n">transform</span> <span class="o">=</span> <span class="n">ToTensor</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Ns</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">show_images</span><span class="p">(</span><span class="n">datset</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Plots some samples from the dataset &quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+    <span class="c1">#for i, img in enumerate(train_dataset):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Ns</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">num_samples</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">indx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">Ns</span><span class="p">)</span>
+        <span class="n">img</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">indx</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">num_samples</span><span class="o">/</span><span class="n">cols</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">show_images</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/bb0253d083250eb7d2a7512eb6653b096872aaec4f1e1a9f8257524713ce7184.png" src="../_images/bb0253d083250eb7d2a7512eb6653b096872aaec4f1e1a9f8257524713ce7184.png" />
+</div>
+</div>
+<section id="step-1-the-forward-process-noise-scheduler">
+<h4>Step 1: The forward process = Noise scheduler<a class="headerlink" href="#step-1-the-forward-process-noise-scheduler" title="Permalink to this heading">#</a></h4>
+<p>We first need to build the inputs for our model, which are more and more noisy images. Instead of doing this sequentially, we can use the closed form provided before to calculate the image for any of the timesteps individually.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ul class="simple">
+<li><p>The noise-levels/variances can be pre-computed</p></li>
+<li><p>There are different types of variance schedules</p></li>
+<li><p>We can sample each timestep image independently (Sums of Gaussians is also Gaussian)</p></li>
+<li><p>No model is needed in this forward step</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">linear_beta_schedule</span><span class="p">(</span><span class="n">timesteps</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mf">0.02</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">timesteps</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_index_from_list</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x_shape</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a specific index t of a passed list of values vals</span>
+<span class="sd">    while considering the batch dimension.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">vals</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="o">*</span><span class="p">((</span><span class="mi">1</span><span class="p">,)</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_shape</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">forward_diffusion_sample</span><span class="p">(</span><span class="n">x_0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Takes an image and a timestep as input and</span>
+<span class="sd">    returns the noisy version of it</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">noise</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">x_0</span><span class="p">)</span>
+    <span class="n">sqrt_alphas_cumprod_t</span> <span class="o">=</span> <span class="n">get_index_from_list</span><span class="p">(</span><span class="n">sqrt_alphas_cumprod</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x_0</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">sqrt_one_minus_alphas_cumprod_t</span> <span class="o">=</span> <span class="n">get_index_from_list</span><span class="p">(</span>
+        <span class="n">sqrt_one_minus_alphas_cumprod</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x_0</span><span class="o">.</span><span class="n">shape</span>
+    <span class="p">)</span>
+    <span class="c1"># mean + variance</span>
+    <span class="k">return</span> <span class="n">sqrt_alphas_cumprod_t</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> <span class="o">*</span> <span class="n">x_0</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> \
+    <span class="o">+</span> <span class="n">sqrt_one_minus_alphas_cumprod_t</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> <span class="o">*</span> <span class="n">noise</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">noise</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+
+<span class="c1"># Define beta schedule</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">betas</span> <span class="o">=</span> <span class="n">linear_beta_schedule</span><span class="p">(</span><span class="n">timesteps</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+
+<span class="c1"># Pre-calculate different terms for closed form</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">-</span> <span class="n">betas</span>
+<span class="n">alphas_cumprod</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cumprod</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">alphas_cumprod_prev</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">alphas_cumprod</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">sqrt_recip_alphas</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">alphas</span><span class="p">)</span>
+<span class="n">sqrt_alphas_cumprod</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">alphas_cumprod</span><span class="p">)</span>
+<span class="n">sqrt_one_minus_alphas_cumprod</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">alphas_cumprod</span><span class="p">)</span>
+<span class="n">posterior_variance</span> <span class="o">=</span> <span class="n">betas</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">alphas_cumprod_prev</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">alphas_cumprod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s test it on our dataset …</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">IMG_SIZE</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">128</span>
+
+<span class="n">data_transforms</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">((</span><span class="n">IMG_SIZE</span><span class="p">,</span> <span class="n">IMG_SIZE</span><span class="p">)),</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">RandomHorizontalFlip</span><span class="p">(),</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span> <span class="c1"># Scales data into [0,1]</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">Lambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># Scale between [-1, 1]</span>
+    <span class="p">]</span>
+<span class="n">data_transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">(</span><span class="n">data_transforms</span><span class="p">)</span>
+
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">ImageFolder</span><span class="p">(</span><span class="n">DATA_DIR_TRAIN</span><span class="p">,</span> <span class="n">transform</span> <span class="o">=</span> <span class="n">data_transform</span><span class="p">)</span>
+<span class="n">test_dataset</span> <span class="o">=</span> <span class="n">ImageFolder</span><span class="p">(</span><span class="n">DATA_DIR_TEST</span><span class="p">,</span> <span class="n">transform</span> <span class="o">=</span> <span class="n">data_transform</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">ConcatDataset</span><span class="p">([</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">test_dataset</span><span class="p">])</span>
+
+<span class="n">dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">BATCH_SIZE</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop_last</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Simulate forward diffusion…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">show_tensor_image</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="n">reverse_transforms</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">Lambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">Lambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span> <span class="c1"># CHW to HWC</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">Lambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span> <span class="o">*</span> <span class="mf">255.</span><span class="p">),</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">Lambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)),</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">ToPILImage</span><span class="p">(),</span>
+    <span class="p">])</span>
+
+    <span class="c1"># Take first image of batch</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="p">:]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">reverse_transforms</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
+    
+<span class="n">image</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">dataloader</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">num_images</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">stepsize</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">num_images</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">stepsize</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="n">idx</span><span class="p">])</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_images</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">idx</span><span class="o">/</span><span class="n">stepsize</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">img</span><span class="p">,</span> <span class="n">noise</span> <span class="o">=</span> <span class="n">forward_diffusion_sample</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">show_tensor_image</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d946b9c07ef5dc784256a6900d4ceb79eb56476df7c85c9ce8eddc8e09339901.png" src="../_images/d946b9c07ef5dc784256a6900d4ceb79eb56476df7c85c9ce8eddc8e09339901.png" />
+</div>
+</div>
+</section>
+<section id="step-2-the-backward-process-u-net">
+<h4>Step 2: The backward process = U-Net<a class="headerlink" href="#step-2-the-backward-process-u-net" title="Permalink to this heading">#</a></h4>
+<p>For a great introduction to UNets, have a look at this post: <a class="reference external" href="https://amaarora.github.io/2020/09/13/unet.html">https://amaarora.github.io/2020/09/13/unet.html</a>.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ul class="simple">
+<li><p>We use a simple form of a UNet for to predict the noise in the image</p></li>
+<li><p>The input is a noisy image, the ouput the noise in the image</p></li>
+<li><p>Because the parameters are shared accross time, we need to tell the network in which timestep we are</p></li>
+<li><p>The Timestep is encoded by the transformer Sinusoidal Embedding</p></li>
+<li><p>We output one single value (mean), because the variance is fixed</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Block</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_ch</span><span class="p">,</span> <span class="n">out_ch</span><span class="p">,</span> <span class="n">time_emb_dim</span><span class="p">,</span> <span class="n">up</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_mlp</span> <span class="o">=</span>  <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">time_emb_dim</span><span class="p">,</span> <span class="n">out_ch</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">up</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">in_ch</span><span class="p">,</span> <span class="n">out_ch</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ConvTranspose2d</span><span class="p">(</span><span class="n">out_ch</span><span class="p">,</span> <span class="n">out_ch</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_ch</span><span class="p">,</span> <span class="n">out_ch</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">out_ch</span><span class="p">,</span> <span class="n">out_ch</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">out_ch</span><span class="p">,</span> <span class="n">out_ch</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bnorm1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">out_ch</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bnorm2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">out_ch</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relu</span>  <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="c1"># First Conv</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bnorm1</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+        <span class="c1"># Time embedding</span>
+        <span class="n">time_emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time_mlp</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+        <span class="c1"># Extend last 2 dimensions</span>
+        <span class="n">time_emb</span> <span class="o">=</span> <span class="n">time_emb</span><span class="p">[(</span><span class="o">...</span><span class="p">,</span> <span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="c1"># Add time channel</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">h</span> <span class="o">+</span> <span class="n">time_emb</span>
+        <span class="c1"># Second Conv</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bnorm2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">h</span><span class="p">)))</span>
+        <span class="c1"># Down or Upsample</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">SinusoidalPositionEmbeddings</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">device</span>
+        <span class="n">half_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">embeddings</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">half_dim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">embeddings</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">half_dim</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span> <span class="o">*</span> <span class="o">-</span><span class="n">embeddings</span><span class="p">)</span>
+        <span class="n">embeddings</span> <span class="o">=</span> <span class="n">time</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">embeddings</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">embeddings</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">embeddings</span><span class="o">.</span><span class="n">sin</span><span class="p">(),</span> <span class="n">embeddings</span><span class="o">.</span><span class="n">cos</span><span class="p">()),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># TODO: Double check the ordering here</span>
+        <span class="k">return</span> <span class="n">embeddings</span>
+
+
+<span class="k">class</span> <span class="nc">SimpleUnet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simplified variant of the Unet architecture.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">image_channels</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">down_channels</span> <span class="o">=</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+        <span class="n">up_channels</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+        <span class="n">out_dim</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">time_emb_dim</span> <span class="o">=</span> <span class="mi">32</span>
+
+        <span class="c1"># Time embedding</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_mlp</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+                <span class="n">SinusoidalPositionEmbeddings</span><span class="p">(</span><span class="n">time_emb_dim</span><span class="p">),</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">time_emb_dim</span><span class="p">,</span> <span class="n">time_emb_dim</span><span class="p">),</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">()</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Initial projection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv0</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">image_channels</span><span class="p">,</span> <span class="n">down_channels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Downsample</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">downs</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">([</span><span class="n">Block</span><span class="p">(</span><span class="n">down_channels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">down_channels</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> \
+                                    <span class="n">time_emb_dim</span><span class="p">)</span> \
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">down_channels</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+        <span class="c1"># Upsample</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ups</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">([</span><span class="n">Block</span><span class="p">(</span><span class="n">up_channels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">up_channels</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> \
+                                        <span class="n">time_emb_dim</span><span class="p">,</span> <span class="n">up</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">up_channels</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+
+        <span class="c1"># Edit: Corrected a bug found by Jakub C (see YouTube comment)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">up_channels</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">out_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestep</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="c1"># Embedd time</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_mlp</span><span class="p">(</span><span class="n">timestep</span><span class="p">)</span>
+        <span class="c1"># Initial conv</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv0</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># Unet</span>
+        <span class="n">residual_inputs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">down</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">downs</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">down</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="n">residual_inputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">up</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ups</span><span class="p">:</span>
+            <span class="n">residual_x</span> <span class="o">=</span> <span class="n">residual_inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="c1"># Add residual x as additional channels</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">residual_x</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">up</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">SimpleUnet</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Num params: &quot;</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">()))</span>
+<span class="n">model</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Num params:  62438883
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SimpleUnet(
+  (time_mlp): Sequential(
+    (0): SinusoidalPositionEmbeddings()
+    (1): Linear(in_features=32, out_features=32, bias=True)
+    (2): ReLU()
+  )
+  (conv0): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  (downs): ModuleList(
+    (0): Block(
+      (time_mlp): Linear(in_features=32, out_features=128, bias=True)
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (transform): Conv2d(128, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (bnorm1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (bnorm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU()
+    )
+    (1): Block(
+      (time_mlp): Linear(in_features=32, out_features=256, bias=True)
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (transform): Conv2d(256, 256, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (bnorm1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (bnorm2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU()
+    )
+    (2): Block(
+      (time_mlp): Linear(in_features=32, out_features=512, bias=True)
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (transform): Conv2d(512, 512, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (bnorm1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (bnorm2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU()
+    )
+    (3): Block(
+      (time_mlp): Linear(in_features=32, out_features=1024, bias=True)
+      (conv1): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (transform): Conv2d(1024, 1024, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+      (conv2): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (bnorm1): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (bnorm2): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU()
+    )
+  )
+  (ups): ModuleList(
+    (0): Block(
+      (time_mlp): Linear(in_features=32, out_features=512, bias=True)
+      (conv1): Conv2d(2048, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (transform): ConvTranspose2d(512, 512, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (bnorm1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (bnorm2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU()
+    )
+    (1): Block(
+      (time_mlp): Linear(in_features=32, out_features=256, bias=True)
+      (conv1): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (transform): ConvTranspose2d(256, 256, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (bnorm1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (bnorm2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU()
+    )
+    (2): Block(
+      (time_mlp): Linear(in_features=32, out_features=128, bias=True)
+      (conv1): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (transform): ConvTranspose2d(128, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (bnorm1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (bnorm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU()
+    )
+    (3): Block(
+      (time_mlp): Linear(in_features=32, out_features=64, bias=True)
+      (conv1): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (transform): ConvTranspose2d(64, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (bnorm1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (bnorm2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU()
+    )
+  )
+  (output): Conv2d(64, 3, kernel_size=(1, 1), stride=(1, 1))
+)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-the-loss">
+<h4>Step 3: The loss<a class="headerlink" href="#step-3-the-loss" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_loss</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">x_noisy</span><span class="p">,</span> <span class="n">noise</span> <span class="o">=</span> <span class="n">forward_diffusion_sample</span><span class="p">(</span><span class="n">x_0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+    <span class="n">noise_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_noisy</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">l1_loss</span><span class="p">(</span><span class="n">noise</span><span class="p">,</span> <span class="n">noise_pred</span><span class="p">)</span>
+    <span class="c1">#return F.mse_loss(noise, noise_pred)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h4>Sampling<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Without adding &#64;torch.no_grad() we quickly run out of memory, because pytorch tacks all the previous images for gradient calculation</p></li>
+<li><p>Because we pre-calculated the noise variances for the forward pass, we also have to use them when we sequentially perform the backward process</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">sample_timestep</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calls the model to predict the noise in the image and returns</span>
+<span class="sd">    the denoised image.</span>
+<span class="sd">    Applies noise to this image, if we are not in the last step yet.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">betas_t</span> <span class="o">=</span> <span class="n">get_index_from_list</span><span class="p">(</span><span class="n">betas</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">sqrt_one_minus_alphas_cumprod_t</span> <span class="o">=</span> <span class="n">get_index_from_list</span><span class="p">(</span>
+        <span class="n">sqrt_one_minus_alphas_cumprod</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+    <span class="p">)</span>
+    <span class="n">sqrt_recip_alphas_t</span> <span class="o">=</span> <span class="n">get_index_from_list</span><span class="p">(</span><span class="n">sqrt_recip_alphas</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="c1"># Call model (current image - noise prediction)</span>
+    <span class="n">model_mean</span> <span class="o">=</span> <span class="n">sqrt_recip_alphas_t</span> <span class="o">*</span> <span class="p">(</span>
+        <span class="n">x</span> <span class="o">-</span> <span class="n">betas_t</span> <span class="o">*</span> <span class="n">model</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">sqrt_one_minus_alphas_cumprod_t</span>
+    <span class="p">)</span>
+    <span class="n">posterior_variance_t</span> <span class="o">=</span> <span class="n">get_index_from_list</span><span class="p">(</span><span class="n">posterior_variance</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># As pointed out by Luis Pereira (see YouTube comment)</span>
+        <span class="c1"># The t&#39;s are offset from the t&#39;s in the paper</span>
+        <span class="k">return</span> <span class="n">model_mean</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">noise</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">model_mean</span> <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">posterior_variance_t</span><span class="p">)</span> <span class="o">*</span> <span class="n">noise</span>
+
+<span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">sample_plot_image</span><span class="p">():</span>
+    <span class="c1"># Sample noise</span>
+    <span class="n">img_size</span> <span class="o">=</span> <span class="n">IMG_SIZE</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">img_size</span><span class="p">,</span> <span class="n">img_size</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">num_images</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">stepsize</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">num_images</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">T</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">1</span><span class="p">,),</span> <span class="n">i</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">sample_timestep</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="c1"># Edit: This is to maintain the natural range of the distribution</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="n">stepsize</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_images</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="n">stepsize</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">show_tensor_image</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="training">
+<h4>Training<a class="headerlink" href="#training" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#model = torch.load(&#39;Diff_U_net.pt&#39;,weights_only=False)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
+<span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># Try more!</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">step</span><span class="p">,</span> <span class="n">batch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+        <span class="n">t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="p">(</span><span class="n">BATCH_SIZE</span><span class="p">,),</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">get_loss</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">batch</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">step</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s2"> | step </span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2"> Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
+            <span class="n">sample_plot_image</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 0 | step 000 Loss: 0.10153281688690186 
+</pre></div>
+</div>
+<img alt="../_images/df14da3a485e5ca38a60cd895b4a83a789e89502cd540b9bf6c84f0ca7349c48.png" src="../_images/df14da3a485e5ca38a60cd895b4a83a789e89502cd540b9bf6c84f0ca7349c48.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 5 | step 000 Loss: 0.10914735496044159 
+</pre></div>
+</div>
+<img alt="../_images/59ceadc103548ea75039d85bf503745d664343b64aa54164135a4b9ec2c1d759.png" src="../_images/59ceadc103548ea75039d85bf503745d664343b64aa54164135a4b9ec2c1d759.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 10 | step 000 Loss: 0.1037554144859314 
+</pre></div>
+</div>
+<img alt="../_images/142155dbe8cb65036a1ca3f219f67535646317513cddf1951c01fedfed72a0a0.png" src="../_images/142155dbe8cb65036a1ca3f219f67535646317513cddf1951c01fedfed72a0a0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 15 | step 000 Loss: 0.11673183739185333 
+</pre></div>
+</div>
+<img alt="../_images/e76d1c42586a36a765f292413008ed77f535e219779e1b2f042ccc5d5ae80f16.png" src="../_images/e76d1c42586a36a765f292413008ed77f535e219779e1b2f042ccc5d5ae80f16.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 20 | step 000 Loss: 0.10023071616888046 
+</pre></div>
+</div>
+<img alt="../_images/ae08065cee48b5e0d71c4b31a6938f85b4108968c1e5e0d475249bda28f3323f.png" src="../_images/ae08065cee48b5e0d71c4b31a6938f85b4108968c1e5e0d475249bda28f3323f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 25 | step 000 Loss: 0.11450882256031036 
+</pre></div>
+</div>
+<img alt="../_images/2eab5b5204e4f6409362cca53a1a1a2173125f6404740e23a9de661bcd7596db.png" src="../_images/2eab5b5204e4f6409362cca53a1a1a2173125f6404740e23a9de661bcd7596db.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 30 | step 000 Loss: 0.10585831105709076 
+</pre></div>
+</div>
+<img alt="../_images/31f242f236923b9842df2f0586d5262f1a9812ced715976931d2fd7ea6f61439.png" src="../_images/31f242f236923b9842df2f0586d5262f1a9812ced715976931d2fd7ea6f61439.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 35 | step 000 Loss: 0.10274531692266464 
+</pre></div>
+</div>
+<img alt="../_images/028c553ba4708b5c0916bdf7cdc7841b85b362f797da2d7ebf2c8d49ee8a3918.png" src="../_images/028c553ba4708b5c0916bdf7cdc7841b85b362f797da2d7ebf2c8d49ee8a3918.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 40 | step 000 Loss: 0.10607850551605225 
+</pre></div>
+</div>
+<img alt="../_images/00e2374764f38fe45da80f4c89b5b4af83236f974dadac9eb51f63cd35162ab1.png" src="../_images/00e2374764f38fe45da80f4c89b5b4af83236f974dadac9eb51f63cd35162ab1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 45 | step 000 Loss: 0.10293224453926086 
+</pre></div>
+</div>
+<img alt="../_images/7f46e226fecf6f370caa5e7e608d73119e66e708bda439cbb3a3069e6fa341fd.png" src="../_images/7f46e226fecf6f370caa5e7e608d73119e66e708bda439cbb3a3069e6fa341fd.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 50 | step 000 Loss: 0.09736713021993637 
+</pre></div>
+</div>
+<img alt="../_images/a32c07d3508921f33098849fe6c025801c2347c97d18d412a9caa2437888ce20.png" src="../_images/a32c07d3508921f33098849fe6c025801c2347c97d18d412a9caa2437888ce20.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 55 | step 000 Loss: 0.10590964555740356 
+</pre></div>
+</div>
+<img alt="../_images/e3419dc8894a3703bce10421e0bc7f688f2c70ed3c3bca60d7955baee6338b1c.png" src="../_images/e3419dc8894a3703bce10421e0bc7f688f2c70ed3c3bca60d7955baee6338b1c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 60 | step 000 Loss: 0.11159863322973251 
+</pre></div>
+</div>
+<img alt="../_images/e3a1600764d97124f4fc57e9e736c2df3e1797996dae5d4b04c5f808122331e5.png" src="../_images/e3a1600764d97124f4fc57e9e736c2df3e1797996dae5d4b04c5f808122331e5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 65 | step 000 Loss: 0.10891596972942352 
+</pre></div>
+</div>
+<img alt="../_images/4bc63c81f79c0376cefe57412af806ce37c58fb7514261dd2911465480fccdf5.png" src="../_images/4bc63c81f79c0376cefe57412af806ce37c58fb7514261dd2911465480fccdf5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 70 | step 000 Loss: 0.10659800469875336 
+</pre></div>
+</div>
+<img alt="../_images/d2def2ec2b1f1a0e7c2b48da0d2cac746d94035e71730b2bf0d7145854247818.png" src="../_images/d2def2ec2b1f1a0e7c2b48da0d2cac746d94035e71730b2bf0d7145854247818.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 75 | step 000 Loss: 0.10499440133571625 
+</pre></div>
+</div>
+<img alt="../_images/f45e86223a3b36b3c482bf46c2bae7d4d82a24e137a9c0aff6a631b16786c48e.png" src="../_images/f45e86223a3b36b3c482bf46c2bae7d4d82a24e137a9c0aff6a631b16786c48e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 80 | step 000 Loss: 0.10662849247455597 
+</pre></div>
+</div>
+<img alt="../_images/96d97ee051e6673eb44f24b63c8bb07760c8dfa0cfd94169f6321e4d15311043.png" src="../_images/96d97ee051e6673eb44f24b63c8bb07760c8dfa0cfd94169f6321e4d15311043.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 85 | step 000 Loss: 0.10670851171016693 
+</pre></div>
+</div>
+<img alt="../_images/42e1011973128bb5cbdad6fb68fd083769be08da402d85d6d15690ae25469d23.png" src="../_images/42e1011973128bb5cbdad6fb68fd083769be08da402d85d6d15690ae25469d23.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 90 | step 000 Loss: 0.10444175451993942 
+</pre></div>
+</div>
+<img alt="../_images/bf0f6241c2862495395b571658b45237a27d9dccc06f08ce09320a0c1a4e3228.png" src="../_images/bf0f6241c2862495395b571658b45237a27d9dccc06f08ce09320a0c1a4e3228.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 95 | step 000 Loss: 0.1138913482427597 
+</pre></div>
+</div>
+<img alt="../_images/237ca74d1ef2e2023e4a583dbdbb39f24532149f5d6c35d52aa417e1195ad1fd.png" src="../_images/237ca74d1ef2e2023e4a583dbdbb39f24532149f5d6c35d52aa417e1195ad1fd.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s1">&#39;Diff_U_net.pt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="score-based-generative-models">
+<h2>3. Score-based Generative Models<a class="headerlink" href="#score-based-generative-models" title="Permalink to this heading">#</a></h2>
+<p>The score (stein) function is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+{\bf{s}}_{\theta}({\bf{x}}) = \nabla_{\bf{x}} \log p_{\theta}({\bf{x}})
+\]</div>
+<img src="img/Stein.png" width="800"><div class="math notranslate nohighlight">
+\[\require{cancel}\]</div>
+<p>There are two reason why optimizing a score function makes sense.</p>
+<ul class="simple">
+<li><p>First, let’s assume you are estimating a pdf using a ANN, the output of the network function <span class="math notranslate nohighlight">\(f_{\theta}({\bf{x}})\)</span>, which can be also understood as an energy function, so the probability distribution can be written as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+p_{\theta}({\bf{x}}) = \frac{\exp(f_{\theta}({\bf{x}}))}{Z_{\theta}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(Z_{\theta}\)</span> is a normalizing constant to ensure that <span class="math notranslate nohighlight">\(\int p_{\theta}({\bf{x}}) d{\bf{x}} = 1\)</span>. When applying Maximum likehood it is required to have acces to a tractably computable normalizing constant, which may not be possible for complex <span class="math notranslate nohighlight">\(f_{\theta}(\cdot)\)</span>. However, by estimating the score function:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\nabla_{\bf{x}} \log p_{\theta}({\bf{x}}) &amp; = \nabla_{\bf{x}} \log \left( \frac{\exp(f_{\theta}({\bf{x}}))}{Z_{\theta}} \right)\\
+&amp;= \nabla_{\bf{x}} f_{\theta}({\bf{x}}) - \cancel{\nabla_{\bf{x}} \log Z_{\theta}}\\
+&amp;= \nabla_{\bf{x}} f_{\theta}({\bf{x}})\\
+&amp;= {\bf{s}}_{\theta}({\bf{x}})
+\end{split}
+\end{split}\]</div>
+<p>Which can be freely represented by an ANN without involving any normalization constant.</p>
+<ul class="simple">
+<li><p>Second, thanks to Langevin dynamics, we can sample from a distribution using only its score function by applying</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+{\bf{x}}_{t+1} \leftarrow {\bf{x}}_{t} + \frac{\eta}{2}{\bf{s}}_{\theta}({\bf{x}}_t)
+\]</div>
+<p>or to avoid the method to collpase we can apply Annealing Langevin dynamics:</p>
+<div class="math notranslate nohighlight">
+\[
+{\bf{x}}_{t+1} \leftarrow {\bf{x}}_{t} + \frac{\eta}{2}{\bf{s}}_{\theta}({\bf{x}}_t) + \sqrt{\eta}\epsilon
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon \sim \mathcal{N}({\bf{0}},{\bf{I}})\)</span>.</p>
+<p>The score model can be optimized by minimizing the Fisher Divergence with the ground truth score function:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{2}\mathbb{E}_{p({\bf{x}})} \left[ \|{\bf{s}}_{\theta}({\bf{x}}) - \underbrace{\nabla_{\bf{x}} \log p_{\theta}({\bf{x}})}_{\text{unknown}}\|_2^2\right]
+\]</div>
+<p>Fourtunately, there is a technique call Score Matching [7] that only requires to have acces the score function. Using integration by parts, the authors derived the following expression which is equivalent to the Fisher divergence formulation:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}_{p({\bf{x}})} \left[ \frac{1}{2} \|{\bf{s}}_{\theta}({\bf{x}})\|_2^2 + \underbrace{\text{tr}\left( \underbrace{\nabla_{\bf{x}} {\bf{s}}_{\theta}}_{\text{Jacobian of} {\,\bf{s}}_{\theta}}\right)}_{\text{div}({\bf{s}}_{\theta})} \right]
+\]</div>
+<p>The problem that arise is that <span class="math notranslate nohighlight">\(\nabla_{\bf{x}} {\bf{s}}_{\theta}\)</span> is hard to compute for images, videos and high dimensional data in general.</p>
+<p>There are two main approaches:</p>
+<ul class="simple">
+<li><p><strong>Sliced score matching</strong>: Idea [8]: project onto random directions to reduce the dimensionality of the Jacobian and add an additional expectation (which is parallelizable). The loss function takes the form:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{2}\mathbb{E}_{p_{\bf{v}}} \mathbb{E}_{p({\bf{x}})} \left[ \left({\bf{v}}^\top{\bf{s}}_{\theta}({\bf{x}}) - {\bf{v}}^\top\nabla_{\bf{x}}\log p_{\theta}({\bf{x}})\right)^2\right]
+\]</div>
+<p>and by applying integration by parts again:
+$<span class="math notranslate nohighlight">\(
+\mathbb{E}_{p_{\bf{v}}} \mathbb{E}_{p({\bf{x}})} \left[ {\bf{v}}^\top \nabla_{{\bf{x}}}{\bf{s}}_{\theta}({\bf{x}}) {\bf{v}} + \frac{1}{2} \left( {\bf{v}}^\top {\bf{s}}_{\theta}({\bf{x}})\right)^2\right]
+\)</span>$</p>
+<p>Note that <span class="math notranslate nohighlight">\({\bf{v}}^\top \nabla_{{\bf{x}}}{\bf{s}}_{\theta}({\bf{x}}) {\bf{v}} = {\bf{v}}^\top \nabla_{{\bf{x}}} \left( {\bf{v}}^\top {\bf{s}}_{\theta}({\bf{x}}) \right)^\top\)</span></p>
+<ul class="simple">
+<li><p><strong>Denoising score matching (DSM)</strong>: Idea [9]: avoid the Jacobian by changing the data distribution in the Fisher divergence by a conditional distribution <span class="math notranslate nohighlight">\(q_{\sigma}(\tilde{{\bf x}}|{\bf x})\)</span> and taking expectations over the two random variables. Thus</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{2}\mathbb{E}_{p({\bf{x}})} \mathbb{E}_{q_{\sigma}(\tilde{{\bf x}}|{\bf x})} \left[ \|{\bf{s}}_{\theta}(\tilde{\bf{x}}) - \nabla_{\tilde{\bf{x}}} \log q_{\sigma}(\tilde{{\bf x}}|{\bf x}) \|_2^2\right]
+\]</div>
+<p>Note that assuming <span class="math notranslate nohighlight">\(q_{\sigma}(\tilde{{\bf x}}|{\bf x}) = \mathcal{\tilde{\bf x};{\bf x},\sigma^2{\bf{I}}}\)</span>, <span class="math notranslate nohighlight">\(\nabla_{\tilde{\bf{x}}} \log q_{\sigma}(\tilde{{\bf x}}|{\bf x}) \propto \frac{1}{\sigma^2} (\tilde{\bf{x}} - {{\bf x}})\)</span>.</p>
+<p>The main drawback is that the method is unable to model the noise-free data distribution.</p>
+<p>Let’s rewrite DSM using <span class="math notranslate nohighlight">\(t \sim \mathcal{U}[1,T]\)</span>, <span class="math notranslate nohighlight">\({\bf x}_0 \sim q({\bf x}_0)\)</span> and <span class="math notranslate nohighlight">\({\bf x}_t \sim q({\bf x}_t|{\bf x}_0)\)</span>, where <span class="math notranslate nohighlight">\(q({\bf x}_t|{\bf x}_0) = \mathcal{{\bf x}_t;{\bf x}_0,\sigma_t^2{\bf{I}}}\)</span>. The loss function can be expressed by:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{2}\mathbb{E}_{t \sim \mathcal{U}[1,T],q({\bf{x}}_0), q({\bf x}_t|{\bf x}_0)}\left[\lambda(t)\sigma_t^2 \left\|{\bf{s}}_{\theta}({\bf{x}}_t,t) + \frac{{\bf x}_t - {\bf x}_0}{\sigma_t^2} \right\|_2^2\right]
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{2}\mathbb{E}_{t \sim \mathcal{U}[1,T],q({\bf{x}}_0), q({\bf x}_t|{\bf x}_0)}\left[\lambda(t) \left\|\sigma_t{\bf{s}}_{\theta}({\bf{x}}_t,t) + \frac{{\bf x}_t - {\bf x}_0}{\sigma_t} \right\|_2^2\right]
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{2}\mathbb{E}_{t \sim \mathcal{U}[1,T],q({\bf{x}}_0), q({\bf x}_t|{\bf x}_0)}\left[\lambda(t) \left\|\epsilon + \sigma_t{\bf{s}}_{\theta}({\bf{x}}_t,t) \right\|_2^2\right]
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\({\bf{x}}_t = {\bf{x}}_0 + \sigma_t\epsilon\)</span>, if we take <span class="math notranslate nohighlight">\(\epsilon_{\theta}({\bf{x}}_t,t) = -\sigma_t {\bf{s}}_{\theta}({\bf{x}}_t,t)\)</span>, the former expression is equivalent to DDPM.</p>
+<p>Why this result is important, because we can use Langevin dynamics to sample the diffusion process.</p>
+<p>As we pointed out before, we have to add some noise to the sampler to avoid the paths’ collapse. However, since the score function is learnt using samples from the <span class="math notranslate nohighlight">\(p({\bf{x}})\)</span> distribution, the regions with low representation (low density regions) are not well-modeled. The most accepted solution is to generate samples using different <span class="math notranslate nohighlight">\(\sigma_t\)</span> values sequentially from large to small.</p>
+</section>
+<section id="stochastic-differential-equations">
+<h2>4. Stochastic Differential Equations<a class="headerlink" href="#stochastic-differential-equations" title="Permalink to this heading">#</a></h2>
+<p>DDPS and SGM can be further generalized to the case of infinite time steps or noise levels, where the perturbation and denoising process are solutions to stochastic differential equations (SDE) [10].</p>
+<p>Score SDE perturb data noise with a difussion process governed by the following stochastic differential equation:</p>
+<div class="math notranslate nohighlight">
+\[
+d{\bf{x}} = {\bf{f}}({\bf{x}},t)dt + g(t)d{\bf{w}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\({\bf{f}}({\bf{x}},t)\)</span> and <span class="math notranslate nohighlight">\(g(t)\)</span> are diffusion and drift functions of the SDE, respectively and <span class="math notranslate nohighlight">\({\bf{w}}\)</span> is a standard Wiener process.</p>
+<p>A remarkable result from Anderson (1982) states that the reverse of a diffusion process is also a diffusion process, running backwards in time and given by the reverse-time SDE:</p>
+<div class="math notranslate nohighlight">
+\[
+d{\bf{x}} = \left[ {\bf{f}}({\bf{x}},t) - g(t)^2 \nabla_{{\bf{x}}} \log p_t({\bf{x}})\right]dt + g(t)d\bar{\bf{w}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bar{\bf{w}}\)</span> is a standard Wiener process when time flows backwards from <span class="math notranslate nohighlight">\(T\)</span> to 0.</p>
+<p>In [10] we can find the expression for <span class="math notranslate nohighlight">\({\bf{f}}(\cdot)\)</span> and <span class="math notranslate nohighlight">\(g(t)\)</span> that makes the SDE formulation equivalent to DDPM and SGM. The relevant part is that, once trained the score function <span class="math notranslate nohighlight">\({\bf{s}}_{\theta}({\bf{x}}_t,t)\)</span>, we can use SDEs solvers (Euler–Maruyama) to sample from the diffusion process efficiently. There are also some results using ODEs.</p>
+<img src="img/SDE.png" width="800">
+<p style="text-align:center;">Image taken from [10]</p><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_timestep_iter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">betas_t</span> <span class="o">=</span> <span class="n">get_index_from_list</span><span class="p">(</span><span class="n">betas</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="o">-</span><span class="n">model</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">model_mean</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">betas_t</span><span class="p">))</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">betas_t</span><span class="o">*</span><span class="n">g</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="mf">0.05</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># As pointed out by Luis Pereira (see YouTube comment)</span>
+        <span class="c1"># The t&#39;s are offset from the t&#39;s in the paper</span>
+        <span class="k">return</span> <span class="n">model_mean</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">noise</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">betas_t</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">noise</span><span class="p">)</span><span class="o">/</span><span class="n">torch</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">g</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
+        <span class="k">return</span>  <span class="n">model_mean</span> <span class="o">+</span>  <span class="n">e</span><span class="o">*</span><span class="n">noise</span>
+
+<span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">sample_plot_image_sde</span><span class="p">():</span>
+    <span class="c1"># Sample noise</span>
+    <span class="n">img_size</span> <span class="o">=</span> <span class="n">IMG_SIZE</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">img_size</span><span class="p">,</span> <span class="n">img_size</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">num_images</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">stepsize</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">num_images</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">T</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">1</span><span class="p">,),</span> <span class="n">i</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">sample_timestep_iter</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="c1"># Edit: This is to maintain the natural range of the distribution</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="n">stepsize</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_images</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="n">stepsize</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">show_tensor_image</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Define beta schedule</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">betas</span> <span class="o">=</span> <span class="n">linear_beta_schedule</span><span class="p">(</span><span class="n">timesteps</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+<span class="n">sample_plot_image_sde</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/799be3ddfd005ec31e8f4612840b7f0aa2b98a0a47ee64538eed8a21de97cd9e.png" src="../_images/799be3ddfd005ec31e8f4612840b7f0aa2b98a0a47ee64538eed8a21de97cd9e.png" />
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[\require{cancel}\]</div>
+</section>
+<section id="conditional-generation">
+<h2>5. Conditional generation<a class="headerlink" href="#conditional-generation" title="Permalink to this heading">#</a></h2>
+<p>So far, we have focused on modeling a complex data distribution <span class="math notranslate nohighlight">\(p(x)\)</span> and how to sample it. However, tipically we are interested in learning conditional distributions <span class="math notranslate nohighlight">\(p(x|y)\)</span>, so that we can control the data we generate through conditioning information <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<section id="classificer-guidance">
+<h3>Classificer guidance<a class="headerlink" href="#classificer-guidance" title="Permalink to this heading">#</a></h3>
+<p>By applying Bayes rule we know that:</p>
+<div class="math notranslate nohighlight">
+\[
+p(x|y) = \frac{p(y|x)p(x)}{\color{red}{p(y)}}
+\]</div>
+<p>Nevertheless, if we use a score-based approach, where the goal is to learn <span class="math notranslate nohighlight">\(\nabla_{x_t} \log p(x_t|y)\)</span> at an arbitrary noise level <span class="math notranslate nohighlight">\(t\)</span>, we can derive the following equivalent form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\nabla_{x_t} \log p(x_t|y) &amp;= \nabla_{x_t} \log \left(\frac{p(x_t)p(y|x_t)}{\color{red}{p(y)}}\right)\\
+&amp;= \nabla_{x_t} \log p(x_t) + \nabla_{x_t} \log p(y/x_t) - \cancel{\nabla_{x_t} \log \color{red}{p(y)}} \\
+&amp;= \underbrace{\nabla_{x_t} \log p(x_t)}_{\text{uncondicional score}} + \underbrace{\nabla_{x_t} \log p(y/x_t)}_{\text{adversarial gradient}}
+\end{split}
+\end{split}\]</div>
+<p>Therefore, the score function for conditional generation is just the combination of a unconstrained generator and a noisy classifier which is easy to train and can change depending on the task. We can add a constant value to balance the importance of each term during generation:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla_{x_t} \log p(x_t|y) = \nabla_{x_t} \log p(x_t) + \gamma \nabla_{x_t} \log p(y/x_t)
+\]</div>
+</section>
+<section id="classifier-free-guidance">
+<h3>Classifier-free guidance<a class="headerlink" href="#classifier-free-guidance" title="Permalink to this heading">#</a></h3>
+<p>In [11], the authors ditch the training of a separate classifier model in favor of an unconditional diffusion model and a conditional diffusion model. By rearranging a previous result:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla_{x_t} \log p(y/x_t) = \nabla_{x_t} \log p(x_t|y) - \nabla_{x_t} \log p(x_t)
+\]</div>
+<p>And pluging it into the classifier guidance score function:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\nabla_{x_t} \log p(x_t|y) &amp;= \nabla_{x_t} \log p(x_t) + \gamma (\nabla_{x_t} \log p(x_t|y) - \nabla_{x_t} \log p(x_t))\\
+&amp;= \nabla_{x_t} \log p(x_t) + \gamma \nabla_{x_t} \log p(x_t|y) - \gamma \nabla_{x_t} \log p(x_t)\\
+&amp;= \underbrace{\gamma \nabla_{x_t} \log p(x_t|y)}_{\text{conditional score}} + \underbrace{(1 - \gamma)\nabla_{x_t} \log p(x_t)}_{\text{unconditional score}}
+\end{split}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>When <span class="math notranslate nohighlight">\(\gamma=0\)</span>, the learned conditional model completely ignores the conditioner</p></li>
+<li><p>When <span class="math notranslate nohighlight">\(\gamma=1\)</span>, the model explicitly learns the vanilla conditional distribution</p></li>
+<li><p>When <span class="math notranslate nohighlight">\(\gamma &gt; 1\)</span>, the diffusion model moves in the direction away from the unconditional score function, which reduces diversity but take a lot of attention to the conditioning information.</p></li>
+</ul>
+<p>The good news is that this technique enables us greater control over our conditional generation procedure and requires only the training od one model, since we can learn both the conditional and unconditional
+diffusion models together as a singular conditional model; the unconditional model can be queried by replacing the conditioning information with a fixed value.</p>
+</section>
+</section>
+<section id="using-diffusion-models-for-unsupervised-explainability">
+<h2>6. Using Diffusion models for unsupervised explainability<a class="headerlink" href="#using-diffusion-models-for-unsupervised-explainability" title="Permalink to this heading">#</a></h2>
+<img src="img/DF_Exp.png" width="800">
+<p style="text-align:center;">Image taken from [12]</p>
+<p>The general idea is as follows:</p>
+<ul class="simple">
+<li><p>Take an image and corrupt it using <span class="math notranslate nohighlight">\(L\)</span> steps of a forward diffusion model</p></li>
+<li><p>Take the corrupted images and denoise it using a classifier guided model. The classsifier is trained to discriminate normal vs pathological samples; therefore, during denoising, the conditional variable is set to a normal value.</p></li>
+<li><p>Subtract the denoised image from the original. The resulting difference will highlight the features that classify the original image as pathological.</p></li>
+</ul>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h3>
+<p>[1] Yang, Y., Jin, M., Wen, H., Zhang, C., Liang, Y., Ma, L., … &amp; Wen, Q. (2024). <a class="reference external" href="https://arxiv.org/abs/2404.18886">A survey on diffusion models for time series and spatio-temporal data</a>. arXiv preprint arXiv:2404.18886.</p>
+<p>[2] Brunton, S. L., &amp; Kutz, J. N. (2022). Data-driven science and engineering: Machine learning, dynamical systems, and control. Cambridge University Press.</p>
+<p>[3] Chen, N., Klushyn, A., Ferroni, F., Bayer, J., &amp; Van Der Smagt, P. (2020). <a class="reference external" href="https://arxiv.org/abs/2002.04881">Learning flat latent manifolds with vaes</a>. arXiv preprint arXiv:2002.04881.</p>
+<p>[4] Luo, C. (2022). <a class="reference external" href="https://arxiv.org/abs/2208.11970">Understanding diffusion models: A unified perspective</a>. arXiv preprint arXiv:2208.11970.</p>
+<p>[5] Ho, J., Jain, A., &amp; Abbeel, P. (2020). <a class="reference external" href="https://proceedings.neurips.cc/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf">Denoising diffusion probabilistic models</a>. Advances in neural information processing systems, 33, 6840-6851.</p>
+<p>[6] Kingma, D., Salimans, T., Poole, B., &amp; Ho, J. (2021). <a class="reference external" href="https://proceedings.neurips.cc/paper/2021/hash/b578f2a52a0229873fefc2a4b06377fa-Abstract.html">Variational diffusion models</a>. Advances in neural information processing systems, 34, 21696-21707.</p>
+<p>[7] Hyvärinen, A., &amp; Dayan, P. (2005). <a class="reference external" href="https://www.jmlr.org/papers/volume6/hyvarinen05a/hyvarinen05a.pdf">Estimation of non-normalized statistical models by score matching</a>. Journal of Machine Learning Research, 6(4).</p>
+<p>[8] Song, Y., Garg, S., Shi, J., &amp; Ermon, S. (2020, August). Sliced score matching: <a class="reference external" href="https://arxiv.org/abs/1905.07088">A scalable approach to density and score estimation</a>. In Uncertainty in Artificial Intelligence (pp. 574-584). PMLR.</p>
+<p>[9] Vincent, P. (2011). <a class="reference external" href="https://ieeexplore.ieee.org/abstract/document/6795935">A connection between score matching and denoising autoencoders</a>. Neural computation, 23(7), 1661-1674.</p>
+<p>[10] Song, Y., Sohl-Dickstein, J., Kingma, D. P., Kumar, A., Ermon, S., &amp; Poole, B. (2020). <a class="reference external" href="https://openreview.net/pdf/ef0eadbe07115b0853e964f17aa09d811cd490f1.pdf">Score-based generative modeling through stochastic differential equations</a>. arXiv preprint arXiv:2011.13456.</p>
+<p>[11] Ho, J., &amp; Salimans, T. (2022). <a class="reference external" href="https://arxiv.org/abs/2207.12598">Classifier-free diffusion guidance</a>. arXiv preprint arXiv:2207.12598.</p>
+<p>[12] Wolleb, J., Bieder, F., Sandkühler, R., &amp; Cattin, P. C. (2022, September). <a class="reference external" href="https://arxiv.org/abs/2203.04306">Diffusion models for medical anomaly detection</a>. In International Conference on Medical image computing and computer-assisted intervention (pp. 35-45). Cham: Springer Nature Switzerland.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Latent_space_optimization.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Conditional generation via Bayesian optimization in latent space</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-lower-bound">1. Evidence Lower Bound</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variational-autoencoders">Variational Autoencoders</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#denoising-difussion-probabilistic-models-ddpm">2. Denoising Difussion Probabilistic Models (DDPM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling">Sampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-implementation-of-a-ddpm">Basic implementation of a DDPM</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-the-forward-process-noise-scheduler">Step 1: The forward process = Noise scheduler</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-the-backward-process-u-net">Step 2: The backward process = U-Net</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-the-loss">Step 3: The loss</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Sampling</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#score-based-generative-models">3. Score-based Generative Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-differential-equations">4. Stochastic Differential Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-generation">5. Conditional generation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classificer-guidance">Classificer guidance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classifier-free-guidance">Classifier-free guidance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-diffusion-models-for-unsupervised-explainability">6. Using Diffusion models for unsupervised explainability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Julián D. Arias-Londoño
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
