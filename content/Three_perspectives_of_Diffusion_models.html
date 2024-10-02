@@ -410,7 +410,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classifier-free-guidance">Classifier-free guidance</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-diffusion-models-for-unsupervised-explainability">6. Using Diffusion models for unsupervised explainability</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-diffusion-models-for-unsupervised-explainability">6. Using Diffusion models for unsupervised explainability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-readings">Further readings:</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
 </li>
@@ -1530,6 +1531,14 @@ diffusion models together as a singular conditional model; the unconditional mod
 <li><p>Take the corrupted images and denoise it using a classifier guided model. The classsifier is trained to discriminate normal vs pathological samples; therefore, during denoising, the conditional variable is set to a normal value.</p></li>
 <li><p>Subtract the denoised image from the original. The resulting difference will highlight the features that classify the original image as pathological.</p></li>
 </ul>
+</section>
+<section id="further-readings">
+<h2>Further readings:<a class="headerlink" href="#further-readings" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Diffusion Schrödinger Bridge for taking from an arbitrary distribution A to a target distribution [13].</p></li>
+<li><p>Flow Matching for Generative Modeling: Advanced alternatives for training DM with better results [14].</p></li>
+<li><p>Physics-Informed Diffusion Models. Conditioning the generation process on physics-based forces [15], [16].</p></li>
+</ul>
 <section id="references">
 <h3>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h3>
 <p>[1] Yang, Y., Jin, M., Wen, H., Zhang, C., Liang, Y., Ma, L., … &amp; Wen, Q. (2024). <a class="reference external" href="https://arxiv.org/abs/2404.18886">A survey on diffusion models for time series and spatio-temporal data</a>. arXiv preprint arXiv:2404.18886.</p>
@@ -1544,6 +1553,10 @@ diffusion models together as a singular conditional model; the unconditional mod
 <p>[10] Song, Y., Sohl-Dickstein, J., Kingma, D. P., Kumar, A., Ermon, S., &amp; Poole, B. (2020). <a class="reference external" href="https://openreview.net/pdf/ef0eadbe07115b0853e964f17aa09d811cd490f1.pdf">Score-based generative modeling through stochastic differential equations</a>. arXiv preprint arXiv:2011.13456.</p>
 <p>[11] Ho, J., &amp; Salimans, T. (2022). <a class="reference external" href="https://arxiv.org/abs/2207.12598">Classifier-free diffusion guidance</a>. arXiv preprint arXiv:2207.12598.</p>
 <p>[12] Wolleb, J., Bieder, F., Sandkühler, R., &amp; Cattin, P. C. (2022, September). <a class="reference external" href="https://arxiv.org/abs/2203.04306">Diffusion models for medical anomaly detection</a>. In International Conference on Medical image computing and computer-assisted intervention (pp. 35-45). Cham: Springer Nature Switzerland.</p>
+<p>[13] De Bortoli, V., Thornton, J., Heng, J., &amp; Doucet, A. (2021). <a class="reference external" href="https://arxiv.org/abs/2106.01357">Diffusion schrödinger bridge with applications to score-based generative modeling</a>. Advances in Neural Information Processing Systems, 34, 17695-17709.</p>
+<p>[14] Lipman, Y., Chen, R. T., Ben-Hamu, H., Nickel, M., &amp; Le, M. (2022). <a class="reference external" href="https://arxiv.org/abs/2210.02747">Flow matching for generative modeling</a>. arXiv preprint arXiv:2210.02747.</p>
+<p>[15] Shu, D., Li, Z., &amp; Farimani, A. B. (2023). <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0021999123000670">A physics-informed diffusion model for high-fidelity flow field reconstruction</a>. Journal of Computational Physics, 478, 111972.</p>
+<p>[16] Bastek, J. H., Sun, W., &amp; Kochmann, D. M. (2024). <a class="reference external" href="https://arxiv.org/abs/2403.14404">Physics-Informed Diffusion Models</a>. arXiv preprint arXiv:2403.14404.</p>
 </section>
 </section>
 </section>
@@ -1629,7 +1642,8 @@ diffusion models together as a singular conditional model; the unconditional mod
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classifier-free-guidance">Classifier-free guidance</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-diffusion-models-for-unsupervised-explainability">6. Using Diffusion models for unsupervised explainability</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-diffusion-models-for-unsupervised-explainability">6. Using Diffusion models for unsupervised explainability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-readings">Further readings:</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
 </li>
