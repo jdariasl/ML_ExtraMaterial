@@ -1531,11 +1531,16 @@ diffusion models together as a singular conditional model; the unconditional mod
 <li><p>Take the corrupted images and denoise it using a classifier guided model. The classsifier is trained to discriminate normal vs pathological samples; therefore, during denoising, the conditional variable is set to a normal value.</p></li>
 <li><p>Subtract the denoised image from the original. The resulting difference will highlight the features that classify the original image as pathological.</p></li>
 </ul>
+<p>This can also be interpreted as a <strong>counterfactual</strong> explainability approach [18].</p>
 </section>
 <section id="further-readings">
 <h2>Further readings:<a class="headerlink" href="#further-readings" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Diffusion Schrödinger Bridge for taking from an arbitrary distribution A to a target distribution [13].</p></li>
+<li><p>Diffusion Schrödinger Bridge for taking from an arbitrary distribution A to a target distribution [13].</p>
+<ul>
+<li><p>Schrödinger Bridge for Generative Speech Enhancement [17].</p></li>
+</ul>
+</li>
 <li><p>Flow Matching for Generative Modeling: Advanced alternatives for training DM with better results [14].</p></li>
 <li><p>Physics-Informed Diffusion Models. Conditioning the generation process on physics-based forces [15], [16].</p></li>
 </ul>
@@ -1557,6 +1562,8 @@ diffusion models together as a singular conditional model; the unconditional mod
 <p>[14] Lipman, Y., Chen, R. T., Ben-Hamu, H., Nickel, M., &amp; Le, M. (2022). <a class="reference external" href="https://arxiv.org/abs/2210.02747">Flow matching for generative modeling</a>. arXiv preprint arXiv:2210.02747.</p>
 <p>[15] Shu, D., Li, Z., &amp; Farimani, A. B. (2023). <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0021999123000670">A physics-informed diffusion model for high-fidelity flow field reconstruction</a>. Journal of Computational Physics, 478, 111972.</p>
 <p>[16] Bastek, J. H., Sun, W., &amp; Kochmann, D. M. (2024). <a class="reference external" href="https://arxiv.org/abs/2403.14404">Physics-Informed Diffusion Models</a>. arXiv preprint arXiv:2403.14404.</p>
+<p>[17] Jukić, A., Korostik, R., Balam, J., &amp; Ginsburg, B. (2024). <a class="reference external" href="https://arxiv.org/abs/2407.16074">Schrödinger Bridge for Generative Speech Enhancement</a>. arXiv preprint arXiv:2407.16074.</p>
+<p>[18] eanneret, G., Simon, L., &amp; Jurie, F. (2022). <a class="reference external" href="https://openaccess.thecvf.com/content/ACCV2022/papers/Jeanneret_Diffusion_Models_for_Counterfactual_Explanations_ACCV_2022_paper.pdf">Diffusion models for counterfactual explanations</a>. In Proceedings of the Asian Conference on Computer Vision (pp. 858-876).</p>
 </section>
 </section>
 </section>
